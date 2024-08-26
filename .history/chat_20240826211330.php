@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<h2>Utilisateurs récemment Inscrit </h2>
+<h2>Utilisateurs Récemment  Inscrits</h2>
 
 
 <div class="filter_chat">
