@@ -61,7 +61,7 @@ function updateDepartmentFilter(filterElement, departments) {
     });
 }
 
-//Tous les appels à socket.emit() et socket.on() doivent se trouver après l'initialisation de socket
+
 const socket = io();
 
 // Enregistrer l'utilisateur lorsqu'il arrive sur la page

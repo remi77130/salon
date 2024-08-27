@@ -75,9 +75,8 @@
            
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
 
-   
-    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
 <script src="fonction/function.js"></script>
 
 

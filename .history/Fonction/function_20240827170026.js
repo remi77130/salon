@@ -7,6 +7,9 @@ async function fetchUsers() {
             throw new Error('Erreur réseau : ' + response.status);
         }
 
+        const socket = io(); // Initialise la connexion au serveur
+
+
         const data = await response.json();
         const tbody = document.querySelector('#users-table tbody');
         tbody.innerHTML = ''; // Vide le tableau avant de le remplir
@@ -61,7 +64,6 @@ function updateDepartmentFilter(filterElement, departments) {
     });
 }
 
-//Tous les appels à socket.emit() et socket.on() doivent se trouver après l'initialisation de socket
 const socket = io();
 
 // Enregistrer l'utilisateur lorsqu'il arrive sur la page

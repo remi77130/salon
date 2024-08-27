@@ -61,13 +61,11 @@ function updateDepartmentFilter(filterElement, departments) {
     });
 }
 
-//Tous les appels à socket.emit() et socket.on() doivent se trouver après l'initialisation de socket
 const socket = io();
 
 // Enregistrer l'utilisateur lorsqu'il arrive sur la page
 const username = 'currentUsername'; // Récupérer le nom d'utilisateur depuis PHP ou session
 socket.emit('registerUser', username);
-socket.emit('privateMessage', { to: recipientSocketId, message: messageContent });
 
 // Détecter la fermeture ou le rechargement de la page
 window.addEventListener('beforeunload', () => {
