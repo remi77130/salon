@@ -75,7 +75,9 @@
            
         </div>
     </div>
-    <script src="NodeProjects/salon_chat/node_modules/socket.io/client-dist/socket.io.js"></script>
+
+       <script src="C:\NodeProjects\salon_chat\node_modules\socket.io\client-dist\socket.io.js"></script>
+
 
 <script src="fonction/function.js"></script>
 

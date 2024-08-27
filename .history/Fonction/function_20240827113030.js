@@ -66,11 +66,6 @@ function updateDepartmentFilter(filterElement, departments) {
 const username = 'currentUsername'; // Récupérer le nom d'utilisateur depuis PHP ou session
 socket.emit('registerUser', username);
 
-//Le code qui émet un événement privateMessage lorsque vous souhaitez envoyer un message 
-//privé doit être inclus dans le fichier JavaScript du côté client
-socket.emit('privateMessage', { to: recipientSocketId, message: messageContent });
-
-
 // Détecter la fermeture ou le rechargement de la page
 window.addEventListener('beforeunload', () => {
     socket.disconnect(); // Informer le serveur que l'utilisateur quitte la page

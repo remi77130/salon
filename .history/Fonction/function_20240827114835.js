@@ -1,3 +1,4 @@
+const socket = io(); // Initialise la connexion au serveur
 async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');
