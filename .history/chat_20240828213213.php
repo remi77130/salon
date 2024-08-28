@@ -48,13 +48,6 @@
   <div classe="conteneur_selected_profil" id="selected-profiles" style="margin-top: 20px;"></div>
 
 
-
-<div class="containeur_profil">
-
-
-
-
-
 <div class="container_users-table">
 <table id="users-table">
 <thead>
@@ -88,25 +81,11 @@
         <!-- Les salons seront affichés ici -->
 
            
+        </div>
     </div>
-    </div>
 
-
-
-
-</div>  <!-- fIN containeur_profil -->
-
-<div>
-<nav>
-        
-    <button><a href="">Salons</a></button>
-    <button><a href="">Options</a></button><button>
-        <a href="">Connécté</a></button>
-
-</nav>
-</div>
    
-<script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
 <script src="fonction/function.js"></script>
 
 

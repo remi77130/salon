@@ -26,7 +26,7 @@
 
 <div class="filter_chat">
 <!-- Ajout du Sélecteur de Filtre -->
-<label for="gender-filter">Genre :</label>
+<label for="gender-filter">Genre : Tous</label>
     <select id="gender-filter" onchange="applyFilters()">
         <option value="all">Tous</option>
         <option value="male">Homme</option>
@@ -37,9 +37,9 @@
 
 
   <!-- Ajout du Sélecteur de Filtre pour le Département -->
-  <label for="department-filter">Dpt :</label>
+  <label for="department-filter">Filtrer par département :</label>
     <select id="department-filter" onchange="applyFilters()">
-        <option value="all">Tous</option>
+        <option value="all">Tous les départements</option>
         <!-- Les options seront remplies dynamiquement -->
     </select>
 </div>
@@ -49,13 +49,6 @@
 
 
 
-<div class="containeur_profil">
-
-
-
-
-
-<div class="container_users-table">
 <table id="users-table">
 <thead>
     <tr>
@@ -72,8 +65,6 @@
 
 </table>
 
-</DIV>
-
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>
             <input id="chat-input" type="text" placeholder="Entrez votre message">
@@ -81,32 +72,18 @@
         </div>
 
 
-    <div class="containeur_salons" id="salons">
+    <div id="salons">
         <h2>Salons de Discussion</h2>
         <button onclick="createSalon()">Créer un Salon</button> <!-- Bouton pour créer un salon -->
         <div id="salons-list">
         <!-- Les salons seront affichés ici -->
 
            
+        </div>
     </div>
-    </div>
 
-
-
-
-</div>  <!-- fIN containeur_profil -->
-
-<div>
-<nav>
-        
-    <button><a href="">Salons</a></button>
-    <button><a href="">Options</a></button><button>
-        <a href="">Connécté</a></button>
-
-</nav>
-</div>
    
-<script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
 <script src="fonction/function.js"></script>
 
 

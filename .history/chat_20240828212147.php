@@ -49,13 +49,6 @@
 
 
 
-<div class="containeur_profil">
-
-
-
-
-
-<div class="container_users-table">
 <table id="users-table">
 <thead>
     <tr>
@@ -72,8 +65,6 @@
 
 </table>
 
-</DIV>
-
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>
             <input id="chat-input" type="text" placeholder="Entrez votre message">
@@ -81,32 +72,18 @@
         </div>
 
 
-    <div class="containeur_salons" id="salons">
+    <div id="salons">
         <h2>Salons de Discussion</h2>
         <button onclick="createSalon()">Créer un Salon</button> <!-- Bouton pour créer un salon -->
         <div id="salons-list">
         <!-- Les salons seront affichés ici -->
 
            
+        </div>
     </div>
-    </div>
 
-
-
-
-</div>  <!-- fIN containeur_profil -->
-
-<div>
-<nav>
-        
-    <button><a href="">Salons</a></button>
-    <button><a href="">Options</a></button><button>
-        <a href="">Connécté</a></button>
-
-</nav>
-</div>
    
-<script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
 <script src="fonction/function.js"></script>
 
 

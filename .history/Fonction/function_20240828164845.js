@@ -26,7 +26,7 @@ async function fetchUsers() {
         data.forEach(user => {
             const row = document.createElement('tr');
 
-            // Ajoute un attribut data-user-id avec l'ID de l'utilisateur sur les tr du tableau chat.php
+            // Ajoute un attribut data-user-id avec l'ID de l'utilisateur
             row.setAttribute('data-user-id', user.id);
 
             // Ajoute le département à la liste des départements uniques
@@ -88,16 +88,13 @@ function showProfileContainer(userId) {
 
             const container = document.getElementById('container_profil');
             container.innerHTML = `
-                <div class="profile-content">
-                    <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
-                    <div>
-                        <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
-                        <h3>${sanitize(data.username)}</h3>
-                    </div>
-                    <div id="chat-messages"></div>
-                    <input id="chat-input" type="text" placeholder="Entrez votre message">
-                    <button id="send-button">Envoyer</button>
+                <div>
+                    <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
+                    <h3>${sanitize(data.username)}</h3>
                 </div>
+                <div id="chat-messages"></div>
+                <input id="chat-input" type="text" placeholder="Entrez votre message">
+                <button id="send-button">Envoyer</button>
             `;
             container.style.display = 'block'; // Afficher la div
 
@@ -111,9 +108,6 @@ function showProfileContainer(userId) {
                     messageInput.value = '';
                 }
             });
-
-
-
  // Gestion de la réception des messages
  socket.on('chatMessage', ({ from, message }) => {
     if (from === userId) {
@@ -126,15 +120,6 @@ function showProfileContainer(userId) {
 })
 .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
-
-
-
-function closeProfileContainer() {
-    document.getElementById('container_profil').style.display = 'none';
-}
-
-
-
 // Ajout d'écouteurs d'événements pour chaque ligne du tableau
 document.querySelectorAll('#users-table tr').forEach(row => {
     const userId = row.getAttribute('data-user-id'); // Assurez-vous d'avoir un attribut data-user-id dans vos <tr>
@@ -150,8 +135,27 @@ function sanitize(input) {
     return element.innerHTML;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function updateDepartmentFilter(filterElement, departments) {
-    filterElement.innerHTML = '<option value="all">Tous</option>';
+    filterElement.innerHTML = '<option value="all">Tous les départements</option>';
     departments.forEach(department => {
         const option = document.createElement('option');
         option.value = department;
@@ -159,6 +163,8 @@ function updateDepartmentFilter(filterElement, departments) {
         filterElement.appendChild(option);
     });
 }
+
+
 
 // ettiquette 
 function addProfileTag(username) {
@@ -192,6 +198,8 @@ function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' e
         row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
 }
+
+
 
 
 // Fonction pour assainir les entrées utilisateur

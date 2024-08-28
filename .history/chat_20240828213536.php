@@ -94,19 +94,9 @@
 
 
 
-</div>  <!-- fIN containeur_profil -->
-
-<div>
-<nav>
-        
-    <button><a href="">Salons</a></button>
-    <button><a href="">Options</a></button><button>
-        <a href="">Connécté</a></button>
-
-</nav>
-</div>
+    </div>  <!-- fIN containeur_profil -->
    
-<script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
 <script src="fonction/function.js"></script>
 
 

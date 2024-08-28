@@ -93,6 +93,7 @@ function showProfileContainer(userId) {
                     <div>
                         <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
                         <h3>${sanitize(data.username)}</h3>
+                        <h3>${sanitize(data.department)}</h3>
                     </div>
                     <div id="chat-messages"></div>
                     <input id="chat-input" type="text" placeholder="Entrez votre message">
@@ -151,7 +152,7 @@ function sanitize(input) {
 }
 
 function updateDepartmentFilter(filterElement, departments) {
-    filterElement.innerHTML = '<option value="all">Tous</option>';
+    filterElement.innerHTML = '<option value="all">Tous les départements</option>';
     departments.forEach(department => {
         const option = document.createElement('option');
         option.value = department;

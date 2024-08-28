@@ -113,6 +113,11 @@ function showProfileContainer(userId) {
             });
 
 
+            function closeProfileContainer() {
+                document.getElementById('container_profil').style.display = 'none';
+            }
+
+
 
  // Gestion de la réception des messages
  socket.on('chatMessage', ({ from, message }) => {
@@ -126,15 +131,6 @@ function showProfileContainer(userId) {
 })
 .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
-
-
-
-function closeProfileContainer() {
-    document.getElementById('container_profil').style.display = 'none';
-}
-
-
-
 // Ajout d'écouteurs d'événements pour chaque ligne du tableau
 document.querySelectorAll('#users-table tr').forEach(row => {
     const userId = row.getAttribute('data-user-id'); // Assurez-vous d'avoir un attribut data-user-id dans vos <tr>
@@ -151,7 +147,7 @@ function sanitize(input) {
 }
 
 function updateDepartmentFilter(filterElement, departments) {
-    filterElement.innerHTML = '<option value="all">Tous</option>';
+    filterElement.innerHTML = '<option value="all">Tous les départements</option>';
     departments.forEach(department => {
         const option = document.createElement('option');
         option.value = department;

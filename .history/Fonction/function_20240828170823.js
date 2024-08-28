@@ -151,7 +151,7 @@ function sanitize(input) {
 }
 
 function updateDepartmentFilter(filterElement, departments) {
-    filterElement.innerHTML = '<option value="all">Tous</option>';
+    filterElement.innerHTML = '<option value="all">Tous les départements</option>';
     departments.forEach(department => {
         const option = document.createElement('option');
         option.value = department;

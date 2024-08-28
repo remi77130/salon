@@ -84,11 +84,14 @@ th{
     display: inline-block;
 }
 
-.containeur_profil
-{
-border: 5px solid firebrick;
-}
 
+
+.conteneur_selected_profil
+{
+    width: 50px ;
+    height: 100px;
+    border: 5px solid red;
+}
 
 
 .container_profil
@@ -104,6 +107,7 @@ border: 5px solid firebrick;
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
+    border: 5px solid black;
 }
 
 #container_profil .profile-content {
@@ -133,15 +137,4 @@ border: 5px solid firebrick;
 {
     width: 100px;
     height: 100px;
-}
-
-
-.container_users-table
-{
-    border: 5px solid black;
-}
-
-.containeur_salons
-{
-    border: 5px solid yellow;
 }

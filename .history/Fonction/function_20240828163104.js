@@ -1,11 +1,3 @@
-//  fichier function.js est conçu pour :
-
-// Récupérer les utilisateurs depuis fetch_users.php.
-// Afficher les utilisateurs dans un tableau.
-// Gérer les clics sur les lignes du tableau pour afficher une div contenant les informations du profil sélectionné.
-// Utiliser Socket.io pour gérer la communication en temps réel.
-
-
 async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');
@@ -26,9 +18,6 @@ async function fetchUsers() {
         data.forEach(user => {
             const row = document.createElement('tr');
 
-            // Ajoute un attribut data-user-id avec l'ID de l'utilisateur sur les tr du tableau chat.php
-            row.setAttribute('data-user-id', user.id);
-
             // Ajoute le département à la liste des départements uniques
             departments.add(user.department);
 
@@ -46,10 +35,6 @@ async function fetchUsers() {
             `;
 
             fragment.appendChild(row); // Ajoute la ligne au fragment
-
-            row.addEventListener('click', () => {
-                showProfileContainer(user.id); // Appelle la fonction pour afficher le profil
-            });
         });
 
         tbody.appendChild(fragment); // Ajoute toutes les lignes en une seule opération DOM
@@ -70,13 +55,7 @@ async function fetchUsers() {
 
 
 
-
-
-
-
-
-// Fonction pour afficher la div de profil  // Fonction pour afficher la div de profil
-
+// Fonction pour afficher la div de profil
 function showProfileContainer(userId) {
     fetch(`get_user_info.php?user_id=${userId}`)
         .then(response => response.json())
@@ -88,16 +67,13 @@ function showProfileContainer(userId) {
 
             const container = document.getElementById('container_profil');
             container.innerHTML = `
-                <div class="profile-content">
-                    <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
-                    <div>
-                        <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
-                        <h3>${sanitize(data.username)}</h3>
-                    </div>
-                    <div id="chat-messages"></div>
-                    <input id="chat-input" type="text" placeholder="Entrez votre message">
-                    <button id="send-button">Envoyer</button>
+                <div>
+                    <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
+                    <h3>${sanitize(data.username)}</h3>
                 </div>
+                <div id="chat-messages"></div>
+                <input id="chat-input" type="text" placeholder="Entrez votre message">
+                <button id="send-button">Envoyer</button>
             `;
             container.style.display = 'block'; // Afficher la div
 
@@ -111,9 +87,6 @@ function showProfileContainer(userId) {
                     messageInput.value = '';
                 }
             });
-
-
-
  // Gestion de la réception des messages
  socket.on('chatMessage', ({ from, message }) => {
     if (from === userId) {
@@ -129,29 +102,15 @@ function showProfileContainer(userId) {
 
 
 
-function closeProfileContainer() {
-    document.getElementById('container_profil').style.display = 'none';
-}
 
 
 
-// Ajout d'écouteurs d'événements pour chaque ligne du tableau
-document.querySelectorAll('#users-table tr').forEach(row => {
-    const userId = row.getAttribute('data-user-id'); // Assurez-vous d'avoir un attribut data-user-id dans vos <tr>
-    row.addEventListener('click', () => {
-        showProfileContainer(userId);
-    });
-});
 
-// Fonction pour assainir les entrées utilisateur
-function sanitize(input) {
-    const element = document.createElement('div');
-    element.textContent = input;
-    return element.innerHTML;
-}
+
+
 
 function updateDepartmentFilter(filterElement, departments) {
-    filterElement.innerHTML = '<option value="all">Tous</option>';
+    filterElement.innerHTML = '<option value="all">Tous les départements</option>';
     departments.forEach(department => {
         const option = document.createElement('option');
         option.value = department;
@@ -159,6 +118,8 @@ function updateDepartmentFilter(filterElement, departments) {
         filterElement.appendChild(option);
     });
 }
+
+
 
 // ettiquette 
 function addProfileTag(username) {
@@ -192,6 +153,8 @@ function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' e
         row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
 }
+
+
 
 
 // Fonction pour assainir les entrées utilisateur
