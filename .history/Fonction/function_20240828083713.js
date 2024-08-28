@@ -68,6 +68,8 @@ function updateDepartmentFilter(filterElement, departments) {
 
 
 
+
+
 // ettiquette 
 function addProfileTag(username) {
     const selectedProfiles = document.getElementById('selected-profiles');

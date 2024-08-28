@@ -61,6 +61,8 @@ function updateDepartmentFilter(filterElement, departments) {
     });
 }
 
+/
+
 
 
 

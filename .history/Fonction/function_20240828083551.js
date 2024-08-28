@@ -61,6 +61,30 @@ function updateDepartmentFilter(filterElement, departments) {
     });
 }
 
+//Tous les appels à socket.emit() et socket.on() doivent se trouver après l'initialisation de socket
+const socket = io();
+
+// Enregistrer l'utilisateur lorsqu'il arrive sur la page
+const username = 'currentUsername'; // Récupérer le nom d'utilisateur depuis PHP ou session
+socket.emit('registerUser', username);
+socket.emit('privateMessage', { to: recipientSocketId, message: messageContent });
+
+// Détecter la fermeture ou le rechargement de la page
+window.addEventListener('beforeunload', () => {
+    socket.disconnect(); // Informer le serveur que l'utilisateur quitte la page
+});
+
+// Réception de l'événement pour supprimer la ligne associée à l'utilisateur déconnecté
+socket.on('removeUserRow', (username) => {
+    const rows = document.querySelectorAll('#users-table tbody tr');
+    rows.forEach(row => {
+        if (row.querySelector('td:nth-child(2)').textContent === username) {
+            row.remove(); // Supprimer la ligne correspondante
+        }
+    });
+});
+
+
 
 
 
