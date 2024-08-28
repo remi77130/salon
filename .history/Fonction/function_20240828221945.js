@@ -1,40 +1,10 @@
-//  fichier function.js est conçu pour :
-
-// Récupérer les utilisateurs depuis fetch_users.php.
-// Afficher les utilisateurs dans un tableau.
-// Gérer les clics sur les lignes du tableau pour afficher une div contenant les informations du profil sélectionné.
-// Utiliser Socket.io pour gérer la communication en temps réel.
-
-
-
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
-
-
-
-// Nous allons permettre aux utilisateurs de s'échanger des messages. Ces messages 
-//seront affichés dynamiquement dans l'interface utilisateur lorsqu'ils sont reçus, 
-// et iront dans la div profile-content qui se trouve déjà dans la page chat.php. 
-// Ainsi, il n'est pas nécessaire de créer une autre page.
-// Nous allons tout placer dans la div profile-content. Nous pouvons également 
-// ajouter une nouvelle div nommée message_user à l'intérieur de profile-content pour 
-// créer une sorte de fenêtre de messagerie. voici la page  function.js et chat.php : 
-
-
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
+// Assurez-vous que socket est défini correctement
+const socket = io(); // Connexion à Socket.io, doit être la première ligne après l'inclusion de socket.io.js
 
 async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');
         
-        // Vérifie que la réponse est correcte
         if (!response.ok) {
             throw new Error('Erreur réseau : ' + response.status);
         }
@@ -50,7 +20,7 @@ async function fetchUsers() {
         data.forEach(user => {
             const row = document.createElement('tr');
 
-            // Ajoute un attribut data-user-id avec l'ID de l'utilisateur sur les tr du tableau chat.php
+            // Ajoute un attribut data-user-id avec l'ID de l'utilisateur
             row.setAttribute('data-user-id', user.id);
 
             // Ajoute le département à la liste des départements uniques
@@ -84,22 +54,10 @@ async function fetchUsers() {
         // Applique les filtres dès le chargement des utilisateurs
         applyFilters();
     } catch (error) {
-        // Affiche une alerte visuelle ou message d'erreur à l'utilisateur
         alert('Une erreur est survenue lors du chargement des utilisateurs. Veuillez réessayer plus tard.');
         console.error('Erreur lors du chargement des utilisateurs:', error);
     }
 }
-
-
-
-
-
-
-
-
-
-
-// Fonction pour afficher la div de profil  // Fonction pour afficher la div de profil
 
 function showProfileContainer(userId) {
     fetch(`get_user_info.php?user_id=${userId}`)
@@ -132,28 +90,21 @@ function showProfileContainer(userId) {
                 const message = messageInput.value;
                 if (message.trim()) {
                     socket.emit('chatMessage', { to: userId, message });
-                    appendMessage('Vous', message); // Fenetre message
+                    appendMessage('Vous', message);
                     messageInput.value = '';
                 }
             });
 
-
-
- // Gestion de la réception des messages
- socket.on('chatMessage', ({ from, message }) => {
-    if (from === userId) {
-        appendMessage(sanitize(data.username), message);
-        const messagesContainer = document.getElementById('chat-messages');
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message;
-        messagesContainer.appendChild(messageElement);
-    }
-});
-})
-.catch(error => console.error('Erreur lors du chargement du profil:', error));
+            // Gestion de la réception des messages
+            socket.on('chatMessage', ({ from, message }) => {
+                if (from === userId) {
+                    appendMessage(sanitize(data.username), message);
+                }
+            });
+        })
+        .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
 
-// Fonction pour ajouter un message à la fenêtre de chat
 function appendMessage(sender, message) {
     const messagesContainer = document.getElementById('message_user');
     const messageElement = document.createElement('div');
@@ -163,20 +114,9 @@ function appendMessage(sender, message) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight; // Défile automatiquement vers le bas
 }
 
-
 function closeProfileContainer() {
     document.getElementById('container_profil').style.display = 'none';
 }
-
-
-
-// Ajout d'écouteurs d'événements pour chaque ligne du tableau
-document.querySelectorAll('#users-table tr').forEach(row => {
-    const userId = row.getAttribute('data-user-id'); // Assurez-vous d'avoir un attribut data-user-id dans vos <tr>
-    row.addEventListener('click', () => {
-        showProfileContainer(userId);
-    });
-});
 
 // Fonction pour assainir les entrées utilisateur
 function sanitize(input) {
@@ -195,23 +135,7 @@ function updateDepartmentFilter(filterElement, departments) {
     });
 }
 
-// ettiquette 
-function addProfileTag(username) {
-    const selectedProfiles = document.getElementById('selected-profiles');
-
-    // Vérifier si l'étiquette existe déjà
-    if (!document.getElementById(`profile-tag-${sanitize(username)}`)) {
-        const profileTag = document.createElement('div');
-        profileTag.id = `profile-tag-${sanitize(username)}`;
-        profileTag.classList.add('profile-tag');
-        profileTag.textContent = `Profil sélectionné : ${sanitize(username)}`;
-        selectedProfiles.appendChild(profileTag);
-    }
-}
-
-
-
-function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' et 'department'
+function applyFilters() {
     const genderFilter = document.getElementById('gender-filter').value;
     const departmentFilter = document.getElementById('department-filter').value;
     const rows = document.querySelectorAll('#users-table tbody tr');
@@ -226,14 +150,6 @@ function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' e
 
         row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
-}
-
-
-// Fonction pour assainir les entrées utilisateur
-function sanitize(input) {
-    const element = document.createElement('div');
-    element.textContent = input;
-    return element.innerHTML;
 }
 
 // Ajout d'écouteurs d'événements pour appliquer les filtres

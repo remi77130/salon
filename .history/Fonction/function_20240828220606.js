@@ -6,30 +6,6 @@
 // Utiliser Socket.io pour gérer la communication en temps réel.
 
 
-
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
-
-
-
-// Nous allons permettre aux utilisateurs de s'échanger des messages. Ces messages 
-//seront affichés dynamiquement dans l'interface utilisateur lorsqu'ils sont reçus, 
-// et iront dans la div profile-content qui se trouve déjà dans la page chat.php. 
-// Ainsi, il n'est pas nécessaire de créer une autre page.
-// Nous allons tout placer dans la div profile-content. Nous pouvons également 
-// ajouter une nouvelle div nommée message_user à l'intérieur de profile-content pour 
-// créer une sorte de fenêtre de messagerie. voici la page  function.js et chat.php : 
-
-
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
-
 async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');
@@ -142,7 +118,6 @@ function showProfileContainer(userId) {
  // Gestion de la réception des messages
  socket.on('chatMessage', ({ from, message }) => {
     if (from === userId) {
-        appendMessage(sanitize(data.username), message);
         const messagesContainer = document.getElementById('chat-messages');
         const messageElement = document.createElement('div');
         messageElement.textContent = message;
@@ -153,15 +128,6 @@ function showProfileContainer(userId) {
 .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
 
-// Fonction pour ajouter un message à la fenêtre de chat
-function appendMessage(sender, message) {
-    const messagesContainer = document.getElementById('message_user');
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
-    messageElement.innerHTML = `<strong>${sanitize(sender)}:</strong> ${sanitize(message)}`;
-    messagesContainer.appendChild(messageElement);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Défile automatiquement vers le bas
-}
 
 
 function closeProfileContainer() {

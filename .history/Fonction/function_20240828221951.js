@@ -6,30 +6,6 @@
 // Utiliser Socket.io pour gérer la communication en temps réel.
 
 
-
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
-
-
-
-// Nous allons permettre aux utilisateurs de s'échanger des messages. Ces messages 
-//seront affichés dynamiquement dans l'interface utilisateur lorsqu'ils sont reçus, 
-// et iront dans la div profile-content qui se trouve déjà dans la page chat.php. 
-// Ainsi, il n'est pas nécessaire de créer une autre page.
-// Nous allons tout placer dans la div profile-content. Nous pouvons également 
-// ajouter une nouvelle div nommée message_user à l'intérieur de profile-content pour 
-// créer une sorte de fenêtre de messagerie. voici la page  function.js et chat.php : 
-
-
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
-
 async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');

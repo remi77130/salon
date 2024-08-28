@@ -24,12 +24,6 @@
 // créer une sorte de fenêtre de messagerie. voici la page  function.js et chat.php : 
 
 
-
-
-
-//                                                          MESSAGERIE IMOPRTANT !!!!!!!!! 
-
-
 async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');
