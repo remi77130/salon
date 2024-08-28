@@ -32,7 +32,7 @@
 
   <!-- Ajout du Sélecteur de Filtre pour le Département -->
   <label for="department-filter">Filtrer par département :</label>
-    <select id="department-filter" onchange="applyFilters()">
+    <select id="department-filter" onchange="filterUsersByDepartment()">
         <option value="all">Tous les départements</option>
         <!-- Les options seront remplies dynamiquement -->
     </select>

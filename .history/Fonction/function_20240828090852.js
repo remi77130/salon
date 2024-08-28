@@ -63,6 +63,11 @@ function updateDepartmentFilter(filterElement, departments) {
 
 
 
+
+
+
+
+
 // ettiquette 
 function addProfileTag(username) {
     const selectedProfiles = document.getElementById('selected-profiles');
@@ -76,8 +81,6 @@ function addProfileTag(username) {
         selectedProfiles.appendChild(profileTag);
     }
 }
-
-
 
 function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' et 'department'
     const genderFilter = document.getElementById('gender-filter').value;
@@ -95,9 +98,6 @@ function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' e
         row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
 }
-
-
-
 
 // Fonction pour assainir les entrées utilisateur
 function sanitize(input) {

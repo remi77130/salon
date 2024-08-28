@@ -21,7 +21,7 @@
 <div class="filter_chat">
 <!-- Ajout du Sélecteur de Filtre -->
 <label for="gender-filter">Filtrer par sexe :</label>
-    <select id="gender-filter" onchange="applyFilters()">
+    <select id="gender-filter" onchange="applyFilters()()">
         <option value="all">Tous</option>
         <option value="male">Homme</option>
         <option value="female">Femme</option>
@@ -32,7 +32,7 @@
 
   <!-- Ajout du Sélecteur de Filtre pour le Département -->
   <label for="department-filter">Filtrer par département :</label>
-    <select id="department-filter" onchange="applyFilters()">
+    <select id="department-filter" onchange="filterUsersByDepartment()">
         <option value="all">Tous les départements</option>
         <!-- Les options seront remplies dynamiquement -->
     </select>
