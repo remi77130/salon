@@ -42,26 +42,7 @@
         <option value="all">Tous</option>
         <!-- Les options seront remplies dynamiquement -->
     </select>
-
-
- <!-- Ajout du Sélecteur de Filtre pour l'Âge -->
- <label for="age-filter">Âge :</label>
-    <select id="age-filter" onchange="applyFilters()">
-        <option value="all">Tous</option>
-        <option value="-30">Moins de 30 ans</option>
-        <option value="30-40">30 à 40 ans</option>
-        <option value="45+">Plus de 45 ans</option>
-    </select>
-
-
-
-
-
 </div>
-
-
-
-
 
   <!-- Conteneur pour les étiquettes des profils sélectionnés -->
   <div classe="conteneur_selected_profil" id="selected-profiles" style="margin-top: 20px;"></div>

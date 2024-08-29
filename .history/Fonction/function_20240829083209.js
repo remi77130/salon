@@ -88,20 +88,18 @@ function showProfileContainer(userId) {
 
             const container = document.getElementById('container_profil');
             container.innerHTML = `
-            <div class="profile-content">
-                <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
-                <div>
-                    <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
-                    <h3>${sanitize(data.username)}</h3>
+                <div class="profile-content">
+                    <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
+                    <div>
+                        <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
+                        <h3>${sanitize(data.username)}</h3>
+                    </div>
+                    <div id="chat-messages"></div>
+                    <input id="chat-input" type="text" placeholder="Entrez votre message">
+                    <button id="send-button">Envoyer</button>
                 </div>
-                <div id="message_user"></div> <!-- Fenêtre de messagerie -->
-                <div id="chat-messages"></div>
-                <input id="chat-input" type="text" placeholder="Entrez votre message">
-                <button id="send-button">Envoyer</button>
-            </div>
-        `;
-        container.style.display = 'block'; // Afficher la div
-
+            `;
+            container.style.display = 'block'; // Afficher la div
 
 
             // Ajouter l'événement d'envoi de message
@@ -181,30 +179,17 @@ function addProfileTag(username) {
 function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' et 'department'
     const genderFilter = document.getElementById('gender-filter').value;
     const departmentFilter = document.getElementById('department-filter').value;
-    const ageFilter = document.getElementById('age-filter').value; // Nouveau filtre pour l'âge
-
     const rows = document.querySelectorAll('#users-table tbody tr');
 
     rows.forEach(row => {
         const genderClass = row.classList.contains('female-row') ? 'female' :
                             row.classList.contains('male-row') ? 'male' : 'other';
         const department = row.querySelector('td:nth-child(4)').textContent;
-        const age = parseInt(row.querySelector('td:nth-child(3)').textContent); // Récupère l'âge depuis la troisième colonne
 
         const genderMatch = (genderFilter === 'all' || genderFilter === genderClass);
         const departmentMatch = (departmentFilter === 'all' || departmentFilter === department);
-        
 
-        let ageMatch = true;
-        if (ageFilter === '-30') {
-            ageMatch = age < 30;
-        } else if (ageFilter === '30-40') {
-            ageMatch = age >= 30 && age <= 40;
-        } else if (ageFilter === '45+') {
-            ageMatch = age > 45;
-        }
-
-        row.style.display = (genderMatch && departmentMatch && ageMatch) ? '' : 'none';
+        row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
 }
 

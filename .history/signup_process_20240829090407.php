@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validation des données
     if (strlen($pseudo) < 3 || strlen($pseudo) > 12) {
-        die("Ton pseudo doit contenir entre 3 et 12 caractères.");
+        die("Ton pseudo doit contenir entre 3 et 8 caractères.");
     }
 
     $age = filter_var($age, FILTER_VALIDATE_INT);
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Gestion de l'upload de l'avatar seulement si un fichier a été téléchargé
-    $avatarDestination = 'uploads/avatar_default.jpg'; // Image par défaut
+    $avatarDestination = NULL;
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
         $avatar = $_FILES['avatar'];
         $avatarName = $avatar['name'];

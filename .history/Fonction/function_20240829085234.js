@@ -189,11 +189,9 @@ function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' e
         const genderClass = row.classList.contains('female-row') ? 'female' :
                             row.classList.contains('male-row') ? 'male' : 'other';
         const department = row.querySelector('td:nth-child(4)').textContent;
-        const age = parseInt(row.querySelector('td:nth-child(3)').textContent); // Récupère l'âge depuis la troisième colonne
 
         const genderMatch = (genderFilter === 'all' || genderFilter === genderClass);
         const departmentMatch = (departmentFilter === 'all' || departmentFilter === department);
-        
 
         let ageMatch = true;
         if (ageFilter === '-30') {
@@ -204,7 +202,7 @@ function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' e
             ageMatch = age > 45;
         }
 
-        row.style.display = (genderMatch && departmentMatch && ageMatch) ? '' : 'none';
+        row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
 }
 

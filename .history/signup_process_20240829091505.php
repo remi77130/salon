@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Gestion de l'upload de l'avatar seulement si un fichier a été téléchargé
-    $avatarDestination = 'uploads/avatar_default.jpg'; // Image par défaut
+    $avatarDestination = 'uploads/avatar_default.png'; // Image par défaut
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
         $avatar = $_FILES['avatar'];
         $avatarName = $avatar['name'];

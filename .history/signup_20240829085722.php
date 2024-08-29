@@ -31,10 +31,8 @@
     
             <label for="username">Pseudo :</label>
             <input type="text" id="username" name="username" required maxlength="12">
-
             <label for="avatar">Avatar :</label>
             <input type="file" id="avatar" name="avatar" accept="image/*" >
-            
             <label for="age">Âge :</label>
             <input type="number" id="age" name="age" required>
 

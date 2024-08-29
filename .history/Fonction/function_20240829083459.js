@@ -181,30 +181,17 @@ function addProfileTag(username) {
 function applyFilters() { // La function 'applyFilters' gere le filtre 'genre' et 'department'
     const genderFilter = document.getElementById('gender-filter').value;
     const departmentFilter = document.getElementById('department-filter').value;
-    const ageFilter = document.getElementById('age-filter').value; // Nouveau filtre pour l'âge
-
     const rows = document.querySelectorAll('#users-table tbody tr');
 
     rows.forEach(row => {
         const genderClass = row.classList.contains('female-row') ? 'female' :
                             row.classList.contains('male-row') ? 'male' : 'other';
         const department = row.querySelector('td:nth-child(4)').textContent;
-        const age = parseInt(row.querySelector('td:nth-child(3)').textContent); // Récupère l'âge depuis la troisième colonne
 
         const genderMatch = (genderFilter === 'all' || genderFilter === genderClass);
         const departmentMatch = (departmentFilter === 'all' || departmentFilter === department);
-        
 
-        let ageMatch = true;
-        if (ageFilter === '-30') {
-            ageMatch = age < 30;
-        } else if (ageFilter === '30-40') {
-            ageMatch = age >= 30 && age <= 40;
-        } else if (ageFilter === '45+') {
-            ageMatch = age > 45;
-        }
-
-        row.style.display = (genderMatch && departmentMatch && ageMatch) ? '' : 'none';
+        row.style.display = (genderMatch && departmentMatch) ? '' : 'none';
     });
 }
 
