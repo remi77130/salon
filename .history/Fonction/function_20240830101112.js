@@ -10,7 +10,31 @@ function userConnected(userId) {
 
 // Fonction pour mettre à jour la liste des utilisateurs affichés
 
- 
+
+const messages = document.getElementById('messages');
+const input = document.getElementById('message');
+const button = document.getElementById('send');
+
+button.addEventListener('click', () => {
+    const msg = input.value;
+    if (msg) {
+        socket.emit('chatMessage', msg);
+        input.value = '';
+
+        
+    }
+});
+
+socket.on('chatMessage', (msg) => {
+    const messageElement = document.createElement('div');
+    messageElement.textContent = msg;
+    messages.appendChild(messageElement);
+});
+
+// Gestion des messages privés (par exemple)
+function sendPrivateMessage(recipientId, message) {
+    socket.emit('privateMessage', { to: recipientId, message: message });
+}
 
 //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
 

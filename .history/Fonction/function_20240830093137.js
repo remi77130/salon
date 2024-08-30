@@ -1,7 +1,5 @@
 // Initialisation de la connexion Socket.io
-
-// Si je met ça plus aucun profil n'apparrait 'const socket = io(); '   //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
-
+//const socket = io(); 
 
 // Fonction pour envoyer l'événement de connexion de l'utilisateur
 function userConnected(userId) {
@@ -9,20 +7,15 @@ function userConnected(userId) {
 }
 
 // Fonction pour mettre à jour la liste des utilisateurs affichés
-
- 
-
-//////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
-
-//socket.on('updateUserList', (activeUserIds) => {    
-   //  const rows = document.querySelectorAll('#users-table tbody tr');
-  //   rows.forEach(row => {
-   //  const userId = row.getAttribute('data-user-id');
-  //   if (!activeUserIds.includes(userId)) {
-  //   row.remove(); // Supprime la ligne si l'utilisateur n'est plus actif
-  //   }
-  //   });
-//     });
+socket.on('updateUserList', (activeUserIds) => {
+    const rows = document.querySelectorAll('#users-table tbody tr');
+    rows.forEach(row => {
+        const userId = row.getAttribute('data-user-id');
+        if (!activeUserIds.includes(userId)) {
+            row.remove(); // Supprime la ligne si l'utilisateur n'est plus actif
+        }
+    });
+});
 
 // Exemple de déclenchement de la connexion lors du chargement de la page ou lorsqu'un utilisateur se connecte
 window.addEventListener('load', () => {
@@ -185,3 +178,5 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 // Charge les utilisateurs au chargement de la page
 fetchUsers();
 
+// Met à jour les utilisateurs toutes les minutes
+setInterval(fetchUsers, 60000); // 60000 ms = 1 minute

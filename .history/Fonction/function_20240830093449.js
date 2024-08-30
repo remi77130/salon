@@ -10,7 +10,7 @@ function userConnected(userId) {
 
 // Fonction pour mettre à jour la liste des utilisateurs affichés
 
- 
+
 
 //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
 
@@ -185,3 +185,5 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 // Charge les utilisateurs au chargement de la page
 fetchUsers();
 
+// Met à jour les utilisateurs toutes les minutes
+setInterval(fetchUsers, 60000); // 60000 ms = 1 minute

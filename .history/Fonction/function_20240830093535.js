@@ -10,7 +10,7 @@ function userConnected(userId) {
 
 // Fonction pour mettre à jour la liste des utilisateurs affichés
 
- 
+
 
 //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
 

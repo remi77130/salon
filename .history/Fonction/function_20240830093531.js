@@ -1,6 +1,8 @@
 // Initialisation de la connexion Socket.io
 
-// Si je met ça plus aucun profil n'apparrait 'const socket = io(); '   //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
+// Si je met ça plus aucun profil n'apparrait '
+const socket = io(); 
+'   //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
 
 
 // Fonction pour envoyer l'événement de connexion de l'utilisateur
@@ -10,7 +12,7 @@ function userConnected(userId) {
 
 // Fonction pour mettre à jour la liste des utilisateurs affichés
 
- 
+
 
 //////////////     SI JE MET CA PLUS AUCUN PROFIL N'APPARRAIT ///////////////////   !!!!!!!!!!!!!!!
 
