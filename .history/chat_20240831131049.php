@@ -126,7 +126,7 @@
 </div>
    
 <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-<script src="function/function.js"></script>
+<script src="fonction/function.js"></script>
 
 
 </body>
