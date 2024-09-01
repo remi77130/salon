@@ -101,7 +101,10 @@
             <div id="chat-messages"></div>
             <input  name="message" id="chat-input" type="text" placeholder="Entrez votre message">
             <button id="send-button">Envoyer</button>
-</div>
+        </div>
+
+<?php if(isset($_POST) && !empty($message)); ?>
+if(isset($_POST) && !empty($ta_variable))
 
 
 

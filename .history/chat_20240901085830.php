@@ -99,11 +99,9 @@
 
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>
-            <input  name="message" id="chat-input" type="text" placeholder="Entrez votre message">
+            <input  id="chat-input" type="text" placeholder="Entrez votre message">
             <button id="send-button">Envoyer</button>
-</div>
-
-
+        </div>
 
 
     <div class="containeur_salons" id="salons">

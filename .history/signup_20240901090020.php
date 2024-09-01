@@ -30,7 +30,7 @@
             <form class="form_signup" action="signup_process.php" method="POST" enctype="multipart/form-data">
     
             <label for="username">Pseudo :</label>
-            <input type="text" id="username" name="username" required maxlength="120">
+            <input type="text" id="username" name="username" required maxlength="12">
 
             <label for="avatar">Avatar :</label>
             <input type="file" id="avatar" name="avatar" accept="image/*" >
@@ -53,6 +53,13 @@
         </select>
     </div>
 
+
+            <label for="gender">Sexe :</label>
+            <select id="gender" name="gender" required>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+            <option value="other">Autre</option>
+            </select>
 
             <div class="gender">
 

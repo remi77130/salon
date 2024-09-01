@@ -27,15 +27,11 @@
 <div class="filter_chat">
 <!-- Ajout du Sélecteur de Filtre -->
 <label for="gender-filter">Genre :</label>
-
     <select id="gender-filter" onchange="applyFilters()">
         <option value="all">Tous</option>
         <option value="male">Homme</option>
         <option value="female">Femme</option>
     </select>
-
-
-    
 
 
 
@@ -99,11 +95,9 @@
 
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>
-            <input  name="message" id="chat-input" type="text" placeholder="Entrez votre message">
+            <input  id="chat-input" type="text" placeholder="Entrez votre message">
             <button id="send-button">Envoyer</button>
-</div>
-
-
+        </div>
 
 
     <div class="containeur_salons" id="salons">

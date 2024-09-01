@@ -96,13 +96,28 @@
 </table>
 
 </DIV>
-
+<form action="" method="post">
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>
             <input  name="message" id="chat-input" type="text" placeholder="Entrez votre message">
             <button id="send-button">Envoyer</button>
-</div>
+        </div>
+</form>
 
+
+<?php if(!empty($message)); 
+
+require "connect_bdd.php";
+
+    // Insertion des informations dans la base de données, y compris la ville sélectionnée
+    $sql = "INSERT INTO messages (message) VALUES (?)";
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Erreur de préparation de la requête : " . $conn->error);
+        die("Une erreur interne est survenue. Veuillez réessayer plus tard.");
+    }
+
+?>
 
 
 

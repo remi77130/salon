@@ -48,16 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Gestion de l'upload de l'avatar seulement si un fichier a été téléchargé
     $avatarDestination = 'uploads/avatar_default.jpg'; // Image par défaut
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-
         $avatar = $_FILES['avatar'];
         $avatarName = $avatar['name'];
-
         $avatarTmpName = $avatar['tmp_name'];
         $avatarSize = $avatar['size'];
-
         $avatarError = $avatar['error'];
         $avatarType = $avatar['type'];
-
 
         $check = getimagesize($avatarTmpName);
         if ($check === false) {
@@ -88,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             error_log("Erreur lors du déplacement du fichier: " . error_get_last()['message']);
             die("Erreur lors du téléchargement de l'avatar.");
         }
-        }
+    }
 
     // Insertion des informations dans la base de données, y compris la ville sélectionnée
     $sql = "INSERT INTO users (username, avatar, age, department, ville_users, gender) VALUES (?, ?, ?, ?, ?, ?)";

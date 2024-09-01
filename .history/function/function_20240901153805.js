@@ -24,13 +24,9 @@ async function fetchUsers() {
     try {
         const response = await fetch('fetch_users.php');
         if (!response.ok) {
-
+            
             throw new Error('Erreur réseau : ' + response.status);
         }
-
-        
-
-
 
         const data = await response.json();
         const tbody = document.querySelector('#users-table tbody');
