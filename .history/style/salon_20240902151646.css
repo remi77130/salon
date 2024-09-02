@@ -91,21 +91,21 @@ border: 5px solid firebrick;
 
 
 
-.container_profil {
+.container_profil
+{
     position: fixed;
     top: 10;
-    TOP: 30%;
     left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
     color: white;
-    z-index: 1000;
-    display: none;
-    padding: 5%;
+    z-index: 1000; /* Pour s'assurer qu'il est au-dessus du reste */
+    display: none; /* Caché par défaut */
+    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
-    box-shadow: 20px 15px 20px #0000000f;
 }
+
 #container_profil .profile-content {
     background-color: #fff;
     color: #000;

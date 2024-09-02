@@ -105,8 +105,8 @@
 </DIV>
 
 
- </div>  <!-- FIN CONTAINER 8PROFIL8 PARENT -->
-
+ </div>
+ <!-- FIN CONTAINER8PROFIL8PARENT -->
 
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>

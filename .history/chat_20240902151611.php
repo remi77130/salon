@@ -15,20 +15,18 @@
 
 </head>
 <body>
-
-<div class="container_profile_parent">
-
 <h2>Utilisateurs Récemment Inscrit </h2>
 
 
     <!-- Conteneur pour le profil sélectionné -->
+<div class="container_profile_parent">
 
-<div class="container_profil" id="container_profil" style="display:none;">
+
+<div class="container_profil" id="container_profil" style="display:none;"></div>
 
 </div>
-
-
    
+    <div class="container_profil" id="container_profil" style="display:none;"></div>
 
 
 <div class="filter_chat">
@@ -103,10 +101,6 @@
 </table>
 
 </DIV>
-
-
- </div>  <!-- FIN CONTAINER 8PROFIL8 PARENT -->
-
 
 <div id="chat-window" style="display:none;">
             <div id="chat-messages"></div>
