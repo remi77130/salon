@@ -248,7 +248,7 @@ $myuser = $_SESSION['user'];
 
 </div>  <!-- fIN containeur_profil -->
 
-<div>
+<div class="options_menu_chat">
 	<nav>
 
 		<button><a href="">Salons</a></button>

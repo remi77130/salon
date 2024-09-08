@@ -26,7 +26,7 @@
             <form class="form_signup" action="signup_process.php" method="POST" enctype="multipart/form-data">
     
             <label for="username">Pseudo :</label>
-            <input type="text" id="username" name="username" pattern="[a-zA-Z0-9_]+" required maxlength="12">
+            <input type="text" id="username" name="username" required maxlength="120">
 
             <label for="avatar">Avatar :</label>
             <input type="file" id="avatar" name="avatar" accept="image/*" >

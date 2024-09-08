@@ -10,7 +10,7 @@ $myuser = $_SESSION['user'];
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Liste des Utilisateurs</title>
+	<title>Liste des Utilisateurs actifs</title>
 	<link rel="stylesheet" href="style/salon.css">
 	<style>
 		.avatar64 {
@@ -159,7 +159,7 @@ $myuser = $_SESSION['user'];
 <body>
 
 <div class="container_profile_parent">
-	<h2>Utilisateurs Récemment Inscrit </h2>
+	<h2>Utilisateurs Actifs </h2>
 	<!-- Conteneur pour le profil sélectionné -->
 
 	<div class="container_profil" id="container_profil" style="display:none;">
@@ -248,7 +248,7 @@ $myuser = $_SESSION['user'];
 
 </div>  <!-- fIN containeur_profil -->
 
-<div>
+<div class="options_menu_chat">
 	<nav>
 
 		<button><a href="">Salons</a></button>

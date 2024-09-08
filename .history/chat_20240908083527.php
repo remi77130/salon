@@ -1,4 +1,6 @@
 <?php session_start();
+
+
 $myuser = $_SESSION['user'];
 ?>
 
@@ -10,156 +12,14 @@ $myuser = $_SESSION['user'];
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Liste des Utilisateurs</title>
+	<title>Liste des Utilisateurs actifs</title>
 	<link rel="stylesheet" href="style/salon.css">
-	<style>
-		.avatar64 {
-			width: 64px;
-			height: 64px;
-			border-radius: 64px;
-		}
-		.avatar32 {
-			width: 32px;
-			height: 32px;
-			border-radius: 32px;
-		}
-		.avatar16 {
-			width: 16px;
-			height: 16px;
-			border-radius: 16px;
-		}
 
-			 /* Basic styles for the modal window */
-		 .modal {
-			 display: none;
-			 position: fixed;
-			 z-index: 9999;
-			 left: 0;
-			 top: 0;
-			 width: 100%;
-			 height: 100%;
-			 background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
-			 justify-content: center;
-			 align-items: center;
-		 }
-
-		.chat-popup {
-			background-color: white;
-			padding: 20px;
-			border-radius: 10px;
-			width: 750px;
-			box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-			max-width: 80%;
-		}
-
-		.chat-header {
-			display: flex;
-			align-items: center;
-			margin-bottom: 15px;
-		}
-
-		.avatar {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			margin-right: 10px;
-		}
-
-		.username {
-			font-size: 18px;
-			font-weight: bold;
-		}
-
-		.chat-content {
-			height: 200px;
-			overflow-y: auto;
-			border: 1px solid #ddd;
-			padding: 10px;
-			margin-bottom: 15px;
-			background-color: #f9f9f9;
-		}
-
-		.chat-footer {
-			display: flex;
-		}
-
-		.chat-input {
-			flex: 1;
-			padding: 5px;
-			border-radius: 5px;
-			border: 1px solid #ccc;
-			margin-right: 5px;
-		}
-
-		.send-btn {
-			padding: 5px 10px;
-			background-color: #4CAF50;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-
-		.close-btn {
-			position: fixed;
-			top: 0;
-			right: 0;
-			background-color: red;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			cursor: pointer;
-			z-index: 10000;
-		}
-
-		.message {
-			display: flex;
-			flex-direction: column;
-			padding: 10px;
-			margin-bottom: 10px;
-			max-width: 70%;
-			border-radius: 10px;
-		}
-
-		.sent {
-			align-self: flex-end;
-			background-color: #d1e7dd;
-			border: 1px solid #badbcc;
-			margin-left: auto;
-		}
-
-		.received {
-			align-self: flex-start;
-			background-color: #f8d7da;
-			border: 1px solid #f5c2c7;
-		}
-		#selected-profiles {
-			padding: 10px;
-			display: flex;
-			gap:10px;
-		}
-		#selected-profiles div {
-			background: yellow;
-			color:black;
-			cursor: pointer;
-			border: 1px solid black;
-			border-radius: 5px;
-			padding: 5px;
-		}
-		#selected-profiles div:hover {
-			background: orange;
-		}
-		tr {
-			cursor: pointer;
-		}
-
-
-	</style>
 </head>
 <body>
 
 <div class="container_profile_parent">
-	<h2>Utilisateurs Récemment Inscrit </h2>
+	<h2>Utilisateurs Actifs </h2>
 	<!-- Conteneur pour le profil sélectionné -->
 
 	<div class="container_profil" id="container_profil" style="display:none;">
@@ -248,7 +108,7 @@ $myuser = $_SESSION['user'];
 
 </div>  <!-- fIN containeur_profil -->
 
-<div>
+<div class="options_menu_chat">
 	<nav>
 
 		<button><a href="">Salons</a></button>
@@ -288,6 +148,8 @@ $myuser = $_SESSION['user'];
 						<div class="chat-header">
 							<img src="${user.avatar}" alt="Avatar" class="avatar64">
 							<div class="username">${user.username}</div>
+							
+							<div class="username">${user.ville}</div>
 						</div>
 						<div class="chat-content"></div>
 						<div class="chat-footer">

@@ -1,6 +1,6 @@
 <?php
 require 'connect_bdd.php';
-session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pseudo = trim($_POST['username']);
     $age = (int)$_POST['age'];
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Gestion de l'upload de l'avatar seulement si un fichier a été téléchargé
-    $avatarDestination = 'uploads/avatar_default.jpg'; // Image par défaut
+    $avatarDestination = 'uploads/tchat-direct-avatar.svg'; // Image par défaut
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
 
         $avatar = $_FILES['avatar'];
@@ -57,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $avatarError = $avatar['error'];
         $avatarType = $avatar['type'];
+
 
         $check = getimagesize($avatarTmpName);
         if ($check === false) {
@@ -83,12 +84,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $avatarDestination = 'uploads/' . $avatarNewName;
 
         // Déplacement du fichier téléchargé vers le dossier cible
-		ini_set('display_errors', 1);error_reporting(E_ALL);
-        if (!move_uploaded_file($avatarTmpName, __DIR__.'/'.$avatarDestination)) {
+        if (!move_uploaded_file($avatarTmpName, $avatarDestination)) {
             error_log("Erreur lors du déplacement du fichier: " . error_get_last()['message']);
             die("Erreur lors du téléchargement de l'avatar.");
         }
         }
+
+
+
+        $_SESSION['user'] ;
+        
+   
+
 
     // Insertion des informations dans la base de données, y compris la ville sélectionnée
     $sql = "INSERT INTO users (username, avatar, age, department, ville_users, gender) VALUES (?, ?, ?, ?, ?, ?)";
@@ -97,26 +104,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Erreur de préparation de la requête : " . $conn->error);
         die("Une erreur interne est survenue. Veuillez réessayer plus tard.");
     }
-	if (!$ville_users) {
-		$ville_users = 'Paris';
-	}
+
+
+
     $stmt->bind_param("ssisss", $pseudo, $avatarDestination, $age, $department, $ville_users, $gender);
 
     if ($stmt->execute()) {
-
         // Redirection après succès
-		$id = $conn->insert_id;
-		$myuser = [
-			'id'=>$id,
-			'username'=>$pseudo,
-			'avatar'=>$avatarDestination,
-			'age'=>$age,
-			'dep'=>$department,
-			'ville'=>$ville_users,
-			'gender'=>$gender
-		];
-		$_SESSION['user'] = $myuser;
-
         header("Location: chat.php");
         exit();
     } else {
