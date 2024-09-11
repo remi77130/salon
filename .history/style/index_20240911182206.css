@@ -95,6 +95,7 @@ h1 {
 
 .counter
 {
+    border: 5px solid red;
     width: 200px;
     margin: auto;
     color: beige;

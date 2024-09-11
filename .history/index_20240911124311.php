@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chat en ligne sans inscription gratuit</title>
+        <title>Inscription</title>
         <link rel="stylesheet" href="style/index.css">
 
         <meta name="description" content="Tchat en direct, gratuit et sans inscription. Rencontres ou convivialité, tu n'as qu'à choisir la salle qui t'intéresse et passer du bon temps avec nous :) Bon chat !" /> 
@@ -13,18 +13,13 @@
     
     </head>
     <body>  
-  <div class="title_index">
-    <h1 class="title">
-    Un pseudo, un chat tout simplement. 
-    </h1>
-  </div>
-
-  <div id="counter">membres connéctées </div>
+  
 
     <div class="login-container">
     <div class="login-box">
 
         
+    <h1>Bienvenue</h1>
         
     <form action="signup_process.php" method="post">
 
@@ -39,7 +34,7 @@
 
 
 
-                    <div>
+                    <div class="input-box">
                 <input placeholder="Age" type="number" id="age" name="age" required>
 
                     </div>
@@ -86,31 +81,16 @@
 
                     <button type="submit" class="btn-submit">Submit</button>
                 </form>
-
+             
+            <div class="image-overlay">
+                <img src="img/coco_logo(1).svg" alt="Person Illustration">
+            </div>
         </div>
 
 
 
 
-        <script>
-        // Fonction pour générer un nombre aléatoire entre 120 et 145
-        function generateRandomNumber(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
 
-        // Fonction pour mettre à jour le compteur toutes les 3 secondes
-        function updateCounter() {
-            const counterElement = document.getElementById('counter');
-            const randomValue = generateRandomNumber(120, 145);
-            counterElement.textContent = randomValue;
-        }
-
-        // Démarre le compteur avec une mise à jour toutes les 3 secondes (3000 ms)
-        setInterval(updateCounter, 3000);
-
-        // Initialisation immédiate du compteur
-        updateCounter();
-    </script>
 
 
 

@@ -33,28 +33,11 @@ function showProfileContainer(userId) {
 
 			document.getElementById('send-button').addEventListener('click', () => {
 				const messageInput = document.getElementById('chat-input');
-				const fileInput = document.querySelector('.chat-file-input');
 				const message = messageInput.value;
-				const file = fileInput.files[0];
-
-				  // Si un fichier est sélectionné
-				  if (file) {
-					const reader = new FileReader();
-					reader.onload = function(event) {
-						const imageData = event.target.result;
-						socket.emit('chatImage', { to: user.id, image: imageData, fileName: file.name });
-					};
-					reader.readAsDataURL(file);
-				}
-			
-
 				if (message.trim()) {
 					socket.emit('chatMessage', {to: userId, message});
 					messageInput.value = '';
 				}
-
-				   // Réinitialisation du champ de fichier
-				   fileInput.value = '';
 			});
 
 			socket.on('chatMessage', ({from, message}) => {
@@ -65,25 +48,7 @@ function showProfileContainer(userId) {
 					messagesContainer.appendChild(messageElement);
 				}
 			});
-
-
-
-			// Ajoutez la gestion de la réception des images
-			//socket.on('chatImage', ({ from, image, fileName }) => {
-				//const messagesContainer = document.querySelector('.chat-content');
-			//	const imageElement = document.createElement('img');
-			//	imageElement.src = image;  // Base64 data
-			//	imageElement.alt = fileName;
-			//	imageElement.classList.add('chat-image');  // Ajout de classe pour styliser l'image
-			//	messagesContainer.appendChild(imageElement);
-			//});
 		})
-
-
-
-
-
-
 		.catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
 
@@ -136,8 +101,15 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 
 
 
+	const $userlistContainer = $('#users-table>tbody');
 
-// CHAT.PHP
+	var myuser = {};
+	myuser = <?php echo json_encode($myuser);?>;
+	var users = {};
+	var user_private = false;
+
+	const socket = io('https://tchat-direct.com:2053', {query: {user: JSON.stringify(myuser)}});
+
 
 
 	function createChat(user, display = true) {
@@ -145,7 +117,6 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 			user_private = user;
 			$chat = $(`#${id}`);
 			$('.modal').hide();
-
 			if (!$chat.length) {
 				let template = `
 				<div id="${id}" class="modal">
@@ -157,7 +128,6 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 						<div class="chat-content"></div>
 						<div class="chat-footer">
 							<input type="text" class="chat-input" placeholder="Tapez votre message...">
-							
 							<button class="send-btn">Envoyer</button>
 						</div>
 					</div>
@@ -205,10 +175,80 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 		}
 	}
 
+
+	socket.on('addUser', function (user) {
+		addUser(user);
+	});
+
+	socket.on('removeUser', function (user) {
+		$(`.user[data-userid=${user.id}]`).remove();
+		delete users[user.id];
+	});
+
+
+	socket.on('users', function (users) {
+		$userlistContainer.empty();
+		Object.values(users).forEach(user => {
+			addUser(user);
+		});
+	});
+
+
+	socket.on('private', function(user, message) {
+		//createChat(user, false);
+		let $chat = $(`#chat_${user.id} .chat-content`);
+		let classe = (user.id === myuser.id) ? 'sent':'received';
+		if ($chat.is(":visible")) {
+			$chat.append(`<div class="message ${classe}">${message}</div>`);
+			$chat.scrollTop($chat[0].scrollHeight);
+		} else {
+			createChat(user, false);
+			let $chat = $(`#chat_${user.id} .chat-content`);
+			$chat.append(`<div class="message ${classe}">${message}</div>`);
+			$chat.scrollTop($chat[0].scrollHeight);
+			addNotification(user);
+		}
+	});
+
 	function addNotification(user) {
 		$notications = $('#selected-profiles');
 		if(!$notications.find(`div[data-userid=${user.id}]`).length) {
 			$notications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
 		}
 	}
+
+
+	$(document).on('click', '.send-btn', (e)=>{
+		let input = $(e.currentTarget).parent().find('input');
+		if (!input.val()) return;
+		socket.emit('private', user_private.username, input.val());
+		let $chat = $(`#chat_${user_private.id} .chat-content`);
+		$chat.append(`<div class="message sent">${input.val()}</div>`);
+		$chat.scrollTop($chat[0].scrollHeight);
+		$(input).val('');
+	});
+
+	$(document).on('keypress', '.chat-input', function (e) {
+		if (e.key === 'Enter' && $(this).val().trim() !== '') {
+			let input = $(e.currentTarget).parent().find('input');
+			if (!input.val()) return;
+			socket.emit('private', user_private.username, input.val());
+			let $chat = $(`#chat_${user_private.id} .chat-content`);
+			$chat.append(`<div class="message sent">${input.val()}</div>`);
+			$chat.scrollTop($chat[0].scrollHeight);
+			$(input).val('');
+		}
+	});
+
+	$userlistContainer.on('click', '.user', function() {
+		const id = $(this).data('userid');
+		let user = users[id];
+		createChat(user);
+	});
+	$(document).on('click', '.notification', (e)=>{
+		$(e.currentTarget).remove();
+	   let user_id = $(e.currentTarget).data('userid');
+	   let user = users[user_id];
+	   createChat(user);
+	});
 

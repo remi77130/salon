@@ -19,7 +19,7 @@
     </h1>
   </div>
 
-  <div id="counter">membres connéctées </div>
+  <div id="counter">0</div>
 
     <div class="login-container">
     <div class="login-box">

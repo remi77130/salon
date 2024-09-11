@@ -1,33 +1,26 @@
 body {
     background-color: #10102a;
     font-family: 'Arial', sans-serif;
-    display: block;
+
     align-items: center;
     height: 100vh;
-
     margin: auto;
-    width: 100vw;
+    width: 500px;
 }
 
 
 @media screen and (max-width: 300px) {
-    body {
-     background-color: #4cae4c;
+    article {
+      padding: 1rem 3rem;
     }
   }
 
-.title_index
 
+.container
 {
-    width: 400px;
-    margin: auto;
-
+display: flex;
 }
 
-.title_index
-{
-    padding: 25px;
-}
 
 .form_signup {
     display: flex;
@@ -66,11 +59,18 @@ button:hover {
     box-sizing: border-box;
 }
 
+body {
+    background-color: #10102a;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
 .login-container {
     position: relative;
     display: flex;
-    margin: auto;
     justify-content: space-between;
     align-items: center;
     width: 70%;
@@ -82,22 +82,18 @@ button:hover {
     padding: 40px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    margin: 50px auto;
-    max-width: 100%;
+    width: 100%;
+    max-width: 400px;
     z-index: 2;
     position: relative;
 }
 
-h1 {
+h2 {
     color: #fff;
-    
-}
-
-.counter
-{
-    width: 200px;
-    margin: auto;
-    color: beige;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
 }
 
 .input-box {

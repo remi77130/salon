@@ -137,6 +137,16 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 
 
 
+
+
+
+
+
+
+
+
+
+
 // CHAT.PHP
 
 
@@ -212,3 +222,37 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 		}
 	}
 
+
+	$(document).on('click', '.send-btn', (e)=>{
+		let input = $(e.currentTarget).parent().find('input');
+		if (!input.val()) return;
+		socket.emit('private', user_private.username, input.val());
+		let $chat = $(`#chat_${user_private.id} .chat-content`);
+		$chat.append(`<div class="message sent">${input.val()}</div>`);
+		$chat.scrollTop($chat[0].scrollHeight);
+		$(input).val('');
+	});
+
+	$(document).on('keypress', '.chat-input', function (e) {
+		if (e.key === 'Enter' && $(this).val().trim() !== '') {
+			let input = $(e.currentTarget).parent().find('input');
+			if (!input.val()) return;
+			socket.emit('private', user_private.username, input.val());
+			let $chat = $(`#chat_${user_private.id} .chat-content`);
+			$chat.append(`<div class="message sent">${input.val()}</div>`);
+			$chat.scrollTop($chat[0].scrollHeight);
+			$(input).val('');
+		}
+	});
+
+	$userlistContainer.on('click', '.user', function() {
+		const id = $(this).data('userid');
+		let user = users[id];
+		createChat(user);
+	});
+	$(document).on('click', '.notification', (e)=>{
+		$(e.currentTarget).remove();
+	   let user_id = $(e.currentTarget).data('userid');
+	   let user = users[user_id];
+	   createChat(user);
+	});

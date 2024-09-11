@@ -170,6 +170,13 @@ $myuser = $_SESSION['user'];
 		}
 	});
 
+	function addNotification(user) {
+		$notications = $('#selected-profiles');
+		if(!$notications.find(`div[data-userid=${user.id}]`).length) {
+			$notications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
+		}
+	}
+
 
 	$(document).on('click', '.send-btn', (e)=>{
 		let input = $(e.currentTarget).parent().find('input');

@@ -137,6 +137,16 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 
 
 
+
+
+
+
+
+
+
+
+
+
 // CHAT.PHP
 
 
@@ -202,13 +212,6 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 
 			// Append the new option to the select element
 			$departmentFilter.append(newOption);
-		}
-	}
-
-	function addNotification(user) {
-		$notications = $('#selected-profiles');
-		if(!$notications.find(`div[data-userid=${user.id}]`).length) {
-			$notications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
 		}
 	}
 

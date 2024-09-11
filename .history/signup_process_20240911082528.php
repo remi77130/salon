@@ -26,33 +26,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Genre invalide.");
     }
 
-   // Générer un pseudo unique
-   $original_pseudo = $pseudo;
-   $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-   if ($stmt === false) {
-       error_log("Erreur de préparation de la requête : " . $conn->error);
-       echo "Une erreur interne est survenue. Veuillez réessayer plus tard.";
-       exit;
-   }
+    // Vérification de la disponibilité du pseudo
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+    if ($stmt === false) {
+        error_log("Erreur de préparation de la requête : " . $conn->error);
+        echo "Une erreur interne est survenue. Veuillez réessayer plus tard.";
+        exit;
+    }
 
-   $pseudo_taken = true;
-   $i = 1;  // Variable pour incrémenter le pseudo en cas de doublon
+    $stmt->bind_param("s", $pseudo);
+    $stmt->execute();
+    $stmt->store_result();
 
-   // Boucle tant que le pseudo est déjà pris
-   while ($pseudo_taken) {
-       $stmt->bind_param("s", $pseudo);
-       $stmt->execute();
-       $stmt->store_result();
-
-       if ($stmt->num_rows > 0) {
-           // Si le pseudo est déjà pris, on ajoute un nombre à la fin
-           $pseudo = $original_pseudo . $i;
-           $i++;
-       } else {
-           $pseudo_taken = false;
-       }
-   }
-   $stmt->close();
+    if ($stmt->num_rows > 0) {
+        // Si le pseudo existe déjà
+        echo "Ce pseudo est déjà pris. Veuillez en choisir un autre.";
+        $stmt->close();
+        exit;
+    }
 
     // Gestion de l'upload de l'avatar seulement si un fichier a été téléchargé
     $avatarDestination = 'uploads/avatar_default.jpg'; // Image par défaut

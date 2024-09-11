@@ -93,7 +93,6 @@ $myuser = $_SESSION['user'];
 	</div>
 
 
-
 	<div class="containeur_salons" id="salons">
 		<h2>Salons de Discussion</h2>
 		<button onclick="createSalon()">Créer un Salon</button> <!-- Bouton pour créer un salon -->
@@ -123,94 +122,6 @@ $myuser = $_SESSION['user'];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <script src="function/function.js"></script>
-<script>
-	const $userlistContainer = $('#users-table>tbody');
-
-	var myuser = {};
-	myuser = <?php echo json_encode($myuser);?>;
-	var users = {};
-	var user_private = false;
-
-	const socket = io('https://tchat-direct.com:2053', {query: {user: JSON.stringify(myuser)}});
-
-
-
-
-	socket.on('addUser', function (user) {
-		addUser(user);
-	});
-
-	socket.on('removeUser', function (user) {
-		$(`.user[data-userid=${user.id}]`).remove();
-		delete users[user.id];
-	});
-
-
-	socket.on('users', function (users) {
-		$userlistContainer.empty();
-		Object.values(users).forEach(user => {
-			addUser(user);
-		});
-	});
-
-
-	socket.on('private', function(user, message) {
-		//createChat(user, false);
-		let $chat = $(`#chat_${user.id} .chat-content`);
-		let classe = (user.id === myuser.id) ? 'sent':'received';
-		if ($chat.is(":visible")) {
-			$chat.append(`<div class="message ${classe}">${message}</div>`);
-			$chat.scrollTop($chat[0].scrollHeight);
-		} else {
-			createChat(user, false);
-			let $chat = $(`#chat_${user.id} .chat-content`);
-			$chat.append(`<div class="message ${classe}">${message}</div>`);
-			$chat.scrollTop($chat[0].scrollHeight);
-			addNotification(user);
-		}
-	});
-
-
-	$(document).on('click', '.send-btn', (e)=>{
-		let input = $(e.currentTarget).parent().find('input');
-		if (!input.val()) return;
-		socket.emit('private', user_private.username, input.val());
-		let $chat = $(`#chat_${user_private.id} .chat-content`);
-		$chat.append(`<div class="message sent">${input.val()}</div>`);
-		$chat.scrollTop($chat[0].scrollHeight);
-		$(input).val('');
-	});
-
-	$(document).on('keypress', '.chat-input', function (e) {
-		if (e.key === 'Enter' && $(this).val().trim() !== '') {
-			let input = $(e.currentTarget).parent().find('input');
-			if (!input.val()) return;
-			socket.emit('private', user_private.username, input.val());
-			let $chat = $(`#chat_${user_private.id} .chat-content`);
-			$chat.append(`<div class="message sent">${input.val()}</div>`);
-			$chat.scrollTop($chat[0].scrollHeight);
-			$(input).val('');
-		}
-	});
-
-	$userlistContainer.on('click', '.user', function() {
-		const id = $(this).data('userid');
-		let user = users[id];
-		createChat(user);
-	});
-	$(document).on('click', '.notification', (e)=>{
-		$(e.currentTarget).remove();
-	   let user_id = $(e.currentTarget).data('userid');
-	   let user = users[user_id];
-	   createChat(user);
-	});
-
-</script>
-
-
-<script>
-    const currentUserId = <?php echo $_SESSION['user_id']; ?>; // ID de l'utilisateur connecté
-</script>
 
 </body>
 </html>

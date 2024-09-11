@@ -239,19 +239,14 @@ th{
     display: inline-block;
 }
 
-.container_profil_parent
-{
-    width: 100%;
-    text-align: center;
-}
+
 
 .container_profil {
-    width: 50%;
-    margin: auto;
     position: fixed;
     top: 10;
     TOP: 30%;
     left: 0;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     z-index: 1000;

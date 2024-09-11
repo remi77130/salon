@@ -119,7 +119,9 @@ $myuser = $_SESSION['user'];
 </div>
 
 
-
+<script>
+    const currentUserId = <?php echo $_SESSION['user_id']; ?>; // ID de l'utilisateur connecté
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <script src="function/function.js"></script>
@@ -134,6 +136,70 @@ $myuser = $_SESSION['user'];
 	const socket = io('https://tchat-direct.com:2053', {query: {user: JSON.stringify(myuser)}});
 
 
+
+	function createChat(user, display = true) {
+			let id = `chat_${user.id}`;
+			user_private = user;
+			$chat = $(`#${id}`);
+			$('.modal').hide();
+			if (!$chat.length) {
+				let template = `
+				<div id="${id}" class="modal">
+					<div class="chat-popup">
+						<div class="chat-header">
+							<img src="${user.avatar}" alt="Avatar" class="avatar64">
+							<div class="username">${user.username}</div>
+						</div>
+						<div class="chat-content"></div>
+						<div class="chat-footer">
+							<input type="text" class="chat-input" placeholder="Tapez votre message...">
+							
+							<button class="send-btn">Envoyer</button>
+						</div>
+					</div>
+					<button class="close-btn" onclick="closeModal()">Fermer</button>
+				</div>`;
+				$('body').append(template);
+			}
+			if (display) {
+				document.getElementById(`${id}`).style.display = 'flex';
+			}
+	}
+
+	function closeModal() {
+		user_private = false;
+		$('.modal').hide();
+	}
+
+	function addUser(user) {
+		users[user.id] = user;
+		let class_user = (user.gender==='female') ? 'female-row': 'male-row';
+		$userlistContainer.append(`
+			<tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" data-dep="${user.dep}  data-gender="${user.gender}">
+				<td><img class="avatar16" src="${user.avatar}" alt="${user.username}"></td>
+				<td><div><b>${user.username}</b></div></td>
+				<td><div>${user.age} ans</div></td>
+				<td><div>${user.dep}</div></td>
+				<td><div>${user.ville}</div></td>
+			</tr>`);
+		addDepartement(user.dep);
+	}
+
+	function addDepartement(dep) {
+		// Select the #department-filter element
+		let $departmentFilter = $('#department-filter');
+
+		// Check if an option with the value 'dep' already exists
+		if ($departmentFilter.find(`option[value='${dep}']`).length === 0) {
+			// If not, create a new option element
+			let newOption = $('<option></option>')
+				.attr('value', dep) // Set the value attribute
+				.text(dep); // Set the text of the option
+
+			// Append the new option to the select element
+			$departmentFilter.append(newOption);
+		}
+	}
 
 
 	socket.on('addUser', function (user) {
@@ -170,6 +236,13 @@ $myuser = $_SESSION['user'];
 		}
 	});
 
+	function addNotification(user) {
+		$notications = $('#selected-profiles');
+		if(!$notications.find(`div[data-userid=${user.id}]`).length) {
+			$notications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
+		}
+	}
+
 
 	$(document).on('click', '.send-btn', (e)=>{
 		let input = $(e.currentTarget).parent().find('input');
@@ -205,11 +278,6 @@ $myuser = $_SESSION['user'];
 	   createChat(user);
 	});
 
-</script>
-
-
-<script>
-    const currentUserId = <?php echo $_SESSION['user_id']; ?>; // ID de l'utilisateur connecté
 </script>
 
 </body>
