@@ -1,9 +1,12 @@
 body {
+  
     background-color: #10102a;
     font-family: 'Arial', sans-serif;
     display: block;
+
     align-items: center;
     height: 100vh;
+    color: rgb(7, 7, 7);
 
     margin: auto;
     width: 100vw;
@@ -67,9 +70,18 @@ button:hover {
 }
 
 
+h1
+{
+    color: #000000 !important;
+
+    font-weight: 900;
+    background-color: #ffffffb8;
+}
+
+
 .login-container {
+
     position: relative;
-    display: flex;
     margin: auto;
     justify-content: space-between;
     align-items: center;
@@ -176,4 +188,16 @@ h1 {
 
 .image-overlay img {
     max-height: 450px;
+}
+
+
+
+.text_index
+{
+    backdrop-filter: blur(50px);
+    background: rgb(0 0 0 / 49%);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 10px 8px 10px #00000030;
+
 }

@@ -15,7 +15,8 @@ function showProfileContainer(userId) {
                     <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
                     <div>
                         <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
-                        <h3>${sanitize(data.username)}</h3>
+                        <h3>${sanitize(data.username)}</h3>  
+						 <h3>${sanitize(data.department)}</h3>
                     </div>
 
                     
@@ -150,10 +151,16 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 				let template = `
 				<div id="${id}" class="modal">
 					<div class="chat-popup">
+
 						<div class="chat-header">
-							<img src="${user.avatar}" alt="Avatar" class="avatar64">
+
+							<div> <img src="${user.avatar}" alt="Avatar" class="avatar64"> </div>
 							<div class="username">${user.username}</div>
+							<div class="userage">${user.age} ans</div>
+							<div class="userdpt">${user.dep}</div>
+							<div class="userville">${user.ville}</div>
 						</div>
+
 						<div class="chat-content"></div>
 						<div class="chat-footer">
 							<input type="text" class="chat-input" placeholder="Tapez votre message...">
@@ -175,14 +182,19 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 		$('.modal').hide();
 	}
 
-	function addUser(user) {
+	function addUser(user) {  // Tableau des users sur chat.php on chercher l'info avec data
 		users[user.id] = user;
 		let class_user = (user.gender==='female') ? 'female-row': 'male-row';
 		$userlistContainer.append(`
-			<tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" data-dep="${user.dep}  data-gender="${user.gender}">
+
+			
+			<tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" 
+			data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" 
+			data-dep="${user.dep}  data-gender="${user.gender}">
+
 				<td><img class="avatar16" src="${user.avatar}" alt="${user.username}"></td>
 				<td><div><b>${user.username}</b></div></td>
-				<td><div>${user.age} ans</div></td>
+				<td><div>${user.age}</div></td>
 				<td><div>${user.dep}</div></td>
 				<td><div>${user.ville}</div></td>
 			</tr>`);

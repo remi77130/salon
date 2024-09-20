@@ -63,7 +63,7 @@ th {
 		}
 
 		.chat-header {
-			display: flex;
+			display: block;
 			align-items: center;
 			margin-bottom: 15px;
 		}
@@ -75,10 +75,37 @@ th {
 			margin-right: 10px;
 		}
 
-		.username {
+		.username 
+        {
 			font-size: 18px;
 			font-weight: bold;
 		}
+
+        
+
+        .userville
+        {
+            font-size: 14px;
+			font-weight: bold;
+        }
+        .userdpt
+        {
+            font-size: 14px;
+			font-weight: bold;
+        }
+
+
+        .userage
+        {
+            font-size: 14px;
+			font-weight: bold;
+        }
+
+
+
+
+
+
 
 		.chat-content {
 			height: 200px;
@@ -328,11 +355,6 @@ th{
     max-width: 80%;
 }
 
-.chat-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
 
 .avatar {
     width: 40px;
@@ -347,7 +369,7 @@ th{
 }
 
 .chat-content {
-    height: 200px;
+    height: 250px;
     overflow-y: auto;
     border: 1px solid #ddd;
     padding: 10px;

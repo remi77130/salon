@@ -96,7 +96,7 @@ $myuser = $_SESSION['user'];
 
 	<div class="containeur_salons" id="salons">
 		<h2>Salons de Discussion</h2>
-		<button onclick="createSalon()">Créer un Salon</button> <!-- Bouton pour créer un salon -->
+		<button class="button_create_salons" id="create_salons" onclick="createSalon()">Créer un Salon</button> <!-- Bouton pour créer un salon -->
 		<div id="salons-list">
 			<!-- Les salons seront affichés ici -->
 

@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "root"; // Nom d'utilisateur par défaut de XAMPP
-$password = ""; // Mot de passe par défaut de XAMPP (généralement vide)
+$username = "admin"; // Nom d'utilisateur par défaut de XAMPP
+$password = "JGsb18as5jgwqZj5"; // Mot de passe par défaut de XAMPP (généralement vide)
 $dbname = "messagerie";
 
 // Création de la connexion

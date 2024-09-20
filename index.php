@@ -6,22 +6,38 @@
         <title>Chat en ligne sans inscription gratuit</title>
         <link rel="stylesheet" href="style/index.css">
 
-        <meta name="description" content="Tchat en direct, gratuit et sans inscription. Rencontres ou convivialité, tu n'as qu'à choisir la salle qui t'intéresse et passer du bon temps avec nous :) Bon chat !" /> 
-        <meta name="keywords" content="tchat, chat, tchat en direct, t'chat, tchat gratuit" />
+        <meta name="description" content="Un pseudo un tchat- numéro 1 du chat anonyme en france."/> 
+        <meta name="keywords" content="tchat direct" />
+        <link rel="icon" type="image/png" href="img/favicon.png" />
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     
     </head>
-    <body>  
+    <body style="background-image: url('img/tchat-direct.png');
+
+    background-color: #10102a;
+    font-family: 'Arial', sans-serif;
+    display: block;
+    background-position-x: center;
+    background-repeat: no-repeat;
+
+
+    align-items: center;
+    height: 100vh;
+    color: aliceblue;
+
+    margin: auto;
+    width: 100vw;">  
   <div class="title_index">
     <h1 class="title">
-    Un pseudo, un chat tout simplement. 
+    Un pseudo, un tchatche tout simplement. 
     </h1>
   </div>
 
-  <div id="counter">membres connéctées </div>
+  <div  class="counter" id="counter"><p>membres</p></div>
 
-    <div class="login-container">
+    <div  class="login-container">
     <div class="login-box">
 
         
@@ -87,6 +103,24 @@
                     <button type="submit" class="btn-submit">Submit</button>
                 </form>
 
+        </div>
+
+
+        <div class="text_index">
+            <h3>tchat direct</h3> <br>
+            
+            <p>Créer des salons sur <span>tchat direct</span>, vous pouvez discuter en live avec les autres utilisateurs connectés. <br>
+            La connexion se fait via votre navigateur, que vous soyez sur PC ou mobile. 
+            c'est le <span>meilleur site de rencontre</span>.
+            <br>
+            L'accès est gratuit et sans inscription, mais un minimum d'informations est requis pour vous connecter au chat : un pseudonyme, votre âge et votre région. 
+            Une fois sur le <span>chat en direct</span>, vous pouvez interagir avec les autres utilisateurs, 
+            soit en privé, soit dans les différents salons publics. Plusieurs options et 
+            fonctionnalités sont disponibles dans la fenêtre de <span>dialogue en direct</span>, et une aide
+            en ligne pour chacune de ces options est accessible directement dans la fenêtre de tchat direct.
+
+
+</p>
         </div>
 
 
