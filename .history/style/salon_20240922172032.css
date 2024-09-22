@@ -224,10 +224,10 @@ button:hover {
 
 
 .female-row {
-    background-color: #ff8bec;
+    background-color: #ffb4f3;
 }
 .male-row {
-    background-color: #4678ff;
+    background-color: #6891ff;
 }
 .other-row {
     background-color: lightgray;
@@ -508,8 +508,4 @@ tr {
 {
     width: 80%;
 }
-.created-div h3
-{
-    background-color: bisque;
-    padding: 0px 0px 0px 5px;
-}
+

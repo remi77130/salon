@@ -97,36 +97,46 @@ $myuser = $_SESSION['user'];
 </div>  <!-- fIN containeur_profil -->
 
 
+<div class="containeur_salons" id="salons"> <!-- Mise en place la creation de salons (div) -->
 
 
 
-
-
-<!-- Bouton pour créer une div -->
-<button id="button_create_div">Créer mon salon</button>
-
-
-
-<div id="container_div_create">
-    <!-- Les nouvelles divs seront ajoutées ici -->
+    <h2>Salons de Discussion</h2>
+    <button class="button_create_salons" id="create_salons" onclick="openSalonModal()">Créer un Salon</button>
+    <div id="salons-list">
+        <!-- Les salons seront affichés ici -->
+    </div>
 </div>
 
-<!-- Formulaire caché pour entrer le nom de la div -->
-<div id="create-div-form" style="display: none;">
-    <label for="div-name">Nom du salon :</label>
-    <input type="text" id="div-name" placeholder="Nom du salon">
-    <button id="submit-div-name">Créer</button>
-    <button id="cancel-create-div">Annuler</button>
+<!-- Modale pour la création de salons -->
+<div id="salon-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeSalonModal()">&times;</span>
+        <h3>Créer un Salon</h3>
+        <form id="salon-form">
+            <input type="text" id="salon-name" placeholder="Nom du salon" required>
+            <button type="submit">Créer</button>
+        </form>
+    </div>
 </div>
 
 
 
 
-
-
-
-
-
+<!-- Zone de discussion pour le salon -->
+<div id="chat-box" class="chat-box" style="display: none;">
+    <div class="chat-header">
+        <h3 id="chat-salon-name">Salon</h3>
+        <button onclick="closeChat()">Fermer</button>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+        <!-- Les messages seront affichés ici -->
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Entrez votre message">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
 
 
 <div class="nav_bottom_chat">

@@ -88,7 +88,6 @@ function showProfileContainer(userId) {
 		.catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
 
-
 function closeProfileContainer() {
 	document.getElementById('container_profil').style.display = 'none';
 }
@@ -225,86 +224,81 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 		}
 	}
 
-
-
-
-
-// Voici le code pour gérer l'ouverture du formulaire, 
-// la soumission du nom de la div, et la création de la div dans le conteneur container_div_create.
-
-
-
-
-	document.getElementById('button_create_div').addEventListener('click', function() {
-		// Afficher le formulaire pour entrer le nom de la div
-		document.getElementById('create-div-form').style.display = 'block';
-	});
+	function openSalonModal() {
+		document.getElementById('salon-modal').style.display = 'block';
+	}
 	
-	document.getElementById('submit-div-name').addEventListener('click', function() {
-		const divName = document.getElementById('div-name').value.trim();
-	
-		if (divName === "") {
-			alert("Veuillez entrer un nom pour la div.");
-			return;
+	function closeSalonModal() {
+		document.getElementById('salon-modal').style.display = 'none';
+	}
+
+	document.getElementById('salon-form').addEventListener('submit', function(event) {
+		event.preventDefault();
+		const salonName = document.getElementById('salon-name').value;
+		
+		if (salonName.trim()) {
+			// Logique pour ajouter le salon
+			const salonDiv = document.createElement('div');
+			salonDiv.innerHTML = `<div>${salonName}</div>`;
+			document.getElementById('salons-list').appendChild(salonDiv);
+			
+			closeSalonModal();  // Ferme la fenêtre après création
+		} else {
+			alert('Veuillez entrer un nom de salon.');
 		}
-		
-
- 			// Envoyer les informations de la div au serveur pour enregistrement
- 			fetch('save_div.php', {
-			method: 'POST',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ div_name: divName }) // Envoi uniquement le nom de la div
-			})
-
-
-		
-	
-		// Créer une nouvelle div avec le nom donné
-		const newDiv = document.createElement('div');
-		newDiv.classList.add('created-div');
-		newDiv.innerHTML = `<h3>${divName}</h3>`;
-		
-		// Ajouter la nouvelle div au conteneur
-		document.getElementById('container_div_create').appendChild(newDiv);
-		
-		// Cacher le formulaire et réinitialiser le champ
-		document.getElementById('create-div-form').style.display = 'none';
-		document.getElementById('div-name').value = '';
 	});
-	
-	document.getElementById('cancel-create-div').addEventListener('click', function() {
-		// Cacher le formulaire sans rien faire
-		document.getElementById('create-div-form').style.display = 'none';
-		document.getElementById('div-name').value = '';
-	});
-	
 
+        // Crée une nouvelle div pour le salon
+        const salonDiv = document.createElement('div');
+        salonDiv.classList.add('salon');
+        salonDiv.innerHTML = `<div>${salonName}</div>`;
 
-	// Fonction pour récupérer les divs depuis la base de données
-function fetchDivs() {
-    fetch('get_user_divs.php') // Requête pour récupérer les divs
-        .then(response => response.json()) // Traiter la réponse en JSON
-        .then(data => {
-            if (data.success) {
-                // Vider le conteneur avant d'ajouter les nouvelles divs
-                const container = document.getElementById('container_div_create');
-                container.innerHTML = ''; 
+        // Ajoute le nouveau salon à la liste des salons
+        document.getElementById('salons-list').appendChild(salonDiv);
 
-                // Ajouter chaque div récupérée
-                data.divs.forEach(div => {
-                    const newDiv = document.createElement('div');
-                    newDiv.classList.add('created-div');
-                    newDiv.innerHTML = `<h3>${div.div_name}</h3>`;
-                    container.appendChild(newDiv);
-                });
-            } else {
-                alert('Erreur lors de la récupération des divs.');
-            }
-        })
-        .catch(error => console.error('Erreur lors de la récupération des divs:', error));
+        // Réinitialise le formulaire et ferme le modal
+        salonForm.reset();
+        closeSalonModal();
+    });
 }
 
-// Appeler cette fonction au chargement de la page pour afficher les divs
-window.addEventListener('load', fetchDivs);
+// Initialiser la création de salon
+createSalon();
+
+
+
+// Fonction pour ouvrir le chat pour un salon spécifique
+function openChat(salonName) {
+    document.getElementById('chat-box').style.display = 'block';
+    document.getElementById('chat-salon-name').innerText = salonName;
+}
+
+// Fonction pour fermer le chat
+function closeChat() {
+    document.getElementById('chat-box').style.display = 'none';
+}
+
+// Fonction pour envoyer un message
+function sendMessage() {
+    const message = document.getElementById('chat-input').value;
+    if (message.trim()) {
+        // Envoyer le message via Socket.io
+        socket.emit('sendMessage', { message: message, salon: document.getElementById('chat-salon-name').innerText });
+        
+        // Ajouter le message à la zone de discussion
+        const messagesDiv = document.getElementById('chat-messages');
+        const newMessage = document.createElement('div');
+        newMessage.innerText = `Vous : ${message}`;
+        messagesDiv.appendChild(newMessage);
+        
+        // Réinitialiser le champ de saisie
+        document.getElementById('chat-input').value = '';
+    }
+}
+
+// Ajout d'écouteur d'événement pour chaque salon
+document.querySelectorAll('#salons-list div').forEach(salonDiv => {
+    salonDiv.addEventListener('click', () => {
+        openChat(salonDiv.innerText);
+    });
+});

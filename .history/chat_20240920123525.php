@@ -20,7 +20,7 @@ $myuser = $_SESSION['user'];
 	<h2>Utilisateurs en lignes </h2>
 	<!-- Conteneur pour le profil sélectionné -->
 
-	<div class="container_profil" id="container_profil" style="display:none;">
+	<div class="container_profil" id="container_profil" style="display:block;">
 	</div>
 
 
@@ -94,40 +94,41 @@ $myuser = $_SESSION['user'];
 
 
 
+	<div class="containeur_salons" id="salons">
+		<h2>Salons de Discussion</h2>
+		<button class="button_create_salons" id="create_salons" onclick="createSalon()">Créer un Salon</button> <!-- Bouton pour créer un salon -->
+		<div id="salons-list">
+			<!-- Les salons seront affichés ici -->
+
+
+		</div>
+	</div>
+
+
+
+<!-- Fenêtre modale pour créer un salon -->
+<div id="salon-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeSalonModal()">&times;</span>
+        <h3>Créer un Salon</h3>
+        <form id="salon-form">
+            <input type="text" id="salon-name" placeholder="Nom du salon" required>
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 </div>  <!-- fIN containeur_profil -->
-
-
-
-
-
-
-
-<!-- Bouton pour créer une div -->
-<button id="button_create_div">Créer mon salon</button>
-
-
-
-<div id="container_div_create">
-    <!-- Les nouvelles divs seront ajoutées ici -->
-</div>
-
-<!-- Formulaire caché pour entrer le nom de la div -->
-<div id="create-div-form" style="display: none;">
-    <label for="div-name">Nom du salon :</label>
-    <input type="text" id="div-name" placeholder="Nom du salon">
-    <button id="submit-div-name">Créer</button>
-    <button id="cancel-create-div">Annuler</button>
-</div>
-
-
-
-
-
-
-
-
-
-
 
 <div class="nav_bottom_chat">
 	<nav>

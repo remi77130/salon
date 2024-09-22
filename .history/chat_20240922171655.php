@@ -103,7 +103,7 @@ $myuser = $_SESSION['user'];
 
 
 <!-- Bouton pour créer une div -->
-<button id="button_create_div">Créer mon salon</button>
+<button id="button_create_div">Créer une Div</button>
 
 
 
@@ -113,8 +113,8 @@ $myuser = $_SESSION['user'];
 
 <!-- Formulaire caché pour entrer le nom de la div -->
 <div id="create-div-form" style="display: none;">
-    <label for="div-name">Nom du salon :</label>
-    <input type="text" id="div-name" placeholder="Nom du salon">
+    <label for="div-name">Nom de la Div :</label>
+    <input type="text" id="div-name" placeholder="Nom de la Div">
     <button id="submit-div-name">Créer</button>
     <button id="cancel-create-div">Annuler</button>
 </div>

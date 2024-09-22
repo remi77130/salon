@@ -247,16 +247,21 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 			alert("Veuillez entrer un nom pour la div.");
 			return;
 		}
-		
 
- 			// Envoyer les informations de la div au serveur pour enregistrement
- 			fetch('save_div.php', {
+		   // Envoyer les informations de la div au serveur pour enregistrement
+		   fetch('save_div.php', {
 			method: 'POST',
 			headers: {
-			'Content-Type': 'application/json'
+				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ div_name: divName }) // Envoi uniquement le nom de la div
-			})
+			body: JSON.stringify({ div_name: divName, user_id: currentUserId }) // Envoi du nom de la div et de l'ID de l'utilisateur
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				// Si l'enregistrement est réussi, ajouter la div dans le conteneur
+
+
 
 
 		
@@ -280,31 +285,3 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 		document.getElementById('div-name').value = '';
 	});
 	
-
-
-	// Fonction pour récupérer les divs depuis la base de données
-function fetchDivs() {
-    fetch('get_user_divs.php') // Requête pour récupérer les divs
-        .then(response => response.json()) // Traiter la réponse en JSON
-        .then(data => {
-            if (data.success) {
-                // Vider le conteneur avant d'ajouter les nouvelles divs
-                const container = document.getElementById('container_div_create');
-                container.innerHTML = ''; 
-
-                // Ajouter chaque div récupérée
-                data.divs.forEach(div => {
-                    const newDiv = document.createElement('div');
-                    newDiv.classList.add('created-div');
-                    newDiv.innerHTML = `<h3>${div.div_name}</h3>`;
-                    container.appendChild(newDiv);
-                });
-            } else {
-                alert('Erreur lors de la récupération des divs.');
-            }
-        })
-        .catch(error => console.error('Erreur lors de la récupération des divs:', error));
-}
-
-// Appeler cette fonction au chargement de la page pour afficher les divs
-window.addEventListener('load', fetchDivs);

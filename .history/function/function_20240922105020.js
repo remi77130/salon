@@ -232,79 +232,57 @@ document.getElementById('age-filter').addEventListener('change', applyFilters);
 // Voici le code pour gérer l'ouverture du formulaire, 
 // la soumission du nom de la div, et la création de la div dans le conteneur container_div_create.
 
+document.getElementById('submit-div-name').addEventListener('click', function() {
+    const divName = document.getElementById('div-name').value.trim();
+
+    if (divName === "") {
+        alert("Veuillez entrer un nom pour la div.");
+        return;
+    }
+
+    // Envoyer les informations de la div au serveur pour enregistrement
+    fetch('save_div.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ div_name: divName, user_id: currentUserId }) // Envoi du nom de la div et de l'ID de l'utilisateur
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Si l'enregistrement est réussi, ajouter la div dans le conteneur
+            const newDiv = document.createElement('div');
+            newDiv.classList.add('created-div');
+            newDiv.innerHTML = `<h3>${divName}</h3>`;
+            document.getElementById('container_div_create').appendChild(newDiv);
+            
+            // Réinitialiser le formulaire
+            document.getElementById('create-div-form').style.display = 'none';
+            document.getElementById('div-name').value = '';
+        } else {
+            alert('Erreur lors de la création de la div.');
+        }
+    });
+});
+
+
+// Ajoutez cette logique dans votre fichier function.js ou chat.php pour récupérer et 
+// afficher les divs à chaque chargement de la page.
 
 
 
-	document.getElementById('button_create_div').addEventListener('click', function() {
-		// Afficher le formulaire pour entrer le nom de la div
-		document.getElementById('create-div-form').style.display = 'block';
-	});
-	
-	document.getElementById('submit-div-name').addEventListener('click', function() {
-		const divName = document.getElementById('div-name').value.trim();
-	
-		if (divName === "") {
-			alert("Veuillez entrer un nom pour la div.");
-			return;
-		}
-		
-
- 			// Envoyer les informations de la div au serveur pour enregistrement
- 			fetch('save_div.php', {
-			method: 'POST',
-			headers: {
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ div_name: divName }) // Envoi uniquement le nom de la div
-			})
-
-
-		
-	
-		// Créer une nouvelle div avec le nom donné
-		const newDiv = document.createElement('div');
-		newDiv.classList.add('created-div');
-		newDiv.innerHTML = `<h3>${divName}</h3>`;
-		
-		// Ajouter la nouvelle div au conteneur
-		document.getElementById('container_div_create').appendChild(newDiv);
-		
-		// Cacher le formulaire et réinitialiser le champ
-		document.getElementById('create-div-form').style.display = 'none';
-		document.getElementById('div-name').value = '';
-	});
-	
-	document.getElementById('cancel-create-div').addEventListener('click', function() {
-		// Cacher le formulaire sans rien faire
-		document.getElementById('create-div-form').style.display = 'none';
-		document.getElementById('div-name').value = '';
-	});
-	
-
-
-	// Fonction pour récupérer les divs depuis la base de données
-function fetchDivs() {
-    fetch('get_user_divs.php') // Requête pour récupérer les divs
-        .then(response => response.json()) // Traiter la réponse en JSON
-        .then(data => {
-            if (data.success) {
-                // Vider le conteneur avant d'ajouter les nouvelles divs
-                const container = document.getElementById('container_div_create');
-                container.innerHTML = ''; 
-
-                // Ajouter chaque div récupérée
-                data.divs.forEach(div => {
-                    const newDiv = document.createElement('div');
-                    newDiv.classList.add('created-div');
-                    newDiv.innerHTML = `<h3>${div.div_name}</h3>`;
-                    container.appendChild(newDiv);
-                });
-            } else {
-                alert('Erreur lors de la récupération des divs.');
-            }
-        })
-        .catch(error => console.error('Erreur lors de la récupération des divs:', error));
-}
-
-// Appeler cette fonction au chargement de la page pour afficher les divs
-window.addEventListener('load', fetchDivs);
+window.addEventListener('load', function() {
+    fetch('get_user_divs.php?user_id=' + currentUserId)
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            data.divs.forEach(div => {
+                const newDiv = document.createElement('div');
+                newDiv.classList.add('created-div');
+                newDiv.innerHTML = `<h3>${div.div_name}</h3>`;
+                document.getElementById('container_div_create').appendChild(newDiv);
+            });
+        }
+    });
+});

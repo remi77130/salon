@@ -224,10 +224,10 @@ button:hover {
 
 
 .female-row {
-    background-color: #ff8bec;
+    background-color: #ffb4f3;
 }
 .male-row {
-    background-color: #4678ff;
+    background-color: #6891ff;
 }
 .other-row {
     background-color: lightgray;
@@ -498,18 +498,135 @@ tr {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    Style pour modal create salons */
+
+
+.modal {
+    position: fixed;
+    top: 50%;
+    height: 90%;
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    /* background-color: #fff; */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    background-color: red;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    align-self: flex-end;
+}
+
+.containeur_salons button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .nav_bottom_chat
 {
     display: none;
 }
 
 
-.created-div
-{
-    width: 80%;
+
+#chat-input {
+    width: calc(100% - 100px);
+    margin-right: 10px;
+    padding: 10px;
 }
-.created-div h3
+
+#send-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}
+
+#container_profil .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+
+.container_profil img
 {
-    background-color: bisque;
-    padding: 0px 0px 0px 5px;
+    width: 100px;
+    height: 100px;
+}
+
+
+
+
+.containeur_salons
+{
+    border: 5px solid yellow;
+    display: block;
+
+}
+
+
+.options_menu_chat
+{
+    display: none;
 }

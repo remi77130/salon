@@ -96,39 +96,6 @@ $myuser = $_SESSION['user'];
 
 </div>  <!-- fIN containeur_profil -->
 
-
-
-
-
-
-
-<!-- Bouton pour créer une div -->
-<button id="button_create_div">Créer mon salon</button>
-
-
-
-<div id="container_div_create">
-    <!-- Les nouvelles divs seront ajoutées ici -->
-</div>
-
-<!-- Formulaire caché pour entrer le nom de la div -->
-<div id="create-div-form" style="display: none;">
-    <label for="div-name">Nom du salon :</label>
-    <input type="text" id="div-name" placeholder="Nom du salon">
-    <button id="submit-div-name">Créer</button>
-    <button id="cancel-create-div">Annuler</button>
-</div>
-
-
-
-
-
-
-
-
-
-
-
 <div class="nav_bottom_chat">
 	<nav>
 
