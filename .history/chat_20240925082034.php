@@ -230,7 +230,7 @@ $myuser = $_SESSION['user'];
 		$(e.currentTarget).remove();
 	   let user_id = $(e.currentTarget).data('userid');
 	   let user = users[user_id];
-	   createChat(user);
+	   createChat(user)
 	});
 
 </script>

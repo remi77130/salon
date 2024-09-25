@@ -111,7 +111,6 @@ $myuser = $_SESSION['user'];
     <!-- Les nouvelles divs seront ajoutées ici -->
 </div>
 
-
 <!-- La div qui s'ouvrira lorsque vous cliquez sur une div créée -->
 <div id="div_chat" style="display:none;">
     <!-- Le contenu du chat sera ici, par exemple le titre -->

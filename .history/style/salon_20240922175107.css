@@ -504,12 +504,19 @@ tr {
 }
 
 
+.created-div
+{
+    width: 80%;
+}
+.created-div h3
+{
+    background-color: bisque;
+    padding: 0px 0px 0px 5px;
+}
 
 .created-div {
     padding: 10px;
     margin: 10px 0;
-    width: 80%;
-
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;

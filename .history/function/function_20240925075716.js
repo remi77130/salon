@@ -296,39 +296,19 @@ function fetchDivs() {
                 data.divs.forEach(div => {
                     const newDiv = document.createElement('div');
                     newDiv.classList.add('created-div');
-					
-                    newDiv.innerHTML = `<h3>${div.div_name}</h3>`;
-                    container.appendChild(newDiv);
 
+                    // Créer le titre h3
+                    const divTitle = document.createElement('h3');
+                    divTitle.textContent = div.div_name;
+                    newDiv.appendChild(divTitle);
 
-
-					// Ajouter un événement de clic à la div pour afficher la div_chat
+                    // Ajouter un événement de clic à la div pour afficher la div_chat
                     newDiv.addEventListener('click', () => {
-                        openChatDiv(newDiv.textContent); // Appeler une fonction pour ouvrir div_chat avec le titre
+                        openChatDiv(divTitle.textContent); // Appeler une fonction pour ouvrir div_chat avec le titre
                     });
 
-
-// Fonction pour ouvrir la div_chat et y afficher le titre
-function openChatDiv(title) {
-    const chatDiv = document.getElementById('div_chat'); // Assurez-vous que cette div existe dans votre HTML
-    if (chatDiv) {
-        // Remplir la div_chat avec le titre
-        chatDiv.innerHTML = `<div>${title}</div>`;
-        chatDiv.style.display = 'block';
-    } else {
-        console.error('div_chat non trouvée');
-    }
-}
-
-
-
-
-
-
-
-
-
-
+                    // Ajouter la nouvelle div dans le conteneur
+                    container.appendChild(newDiv);
                 });
             } else {
                 alert('Erreur lors de la récupération des divs.');
@@ -337,5 +317,17 @@ function openChatDiv(title) {
         .catch(error => console.error('Erreur lors de la récupération des divs:', error));
 }
 
-// Appeler cette fonction au chargement de la page pour afficher les divs
+// Fonction pour ouvrir la div_chat et y afficher le titre
+function openChatDiv(title) {
+    // Récupérer la div_chat
+    const chatDiv = document.getElementById('div_chat');
+
+    // Remplir la div_chat avec le titre
+    chatDiv.innerHTML = `<h3>${title}</h3>`;
+
+    // Afficher la div_chat
+    chatDiv.style.display = 'block';
+}
+
+// Charger les divs au chargement de la page
 window.addEventListener('load', fetchDivs);

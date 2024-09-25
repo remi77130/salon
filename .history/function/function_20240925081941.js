@@ -302,18 +302,12 @@ function fetchDivs() {
 
 
 
-					// Ajouter un événement de clic à la div pour afficher la div_chat
-                    newDiv.addEventListener('click', () => {
-                        openChatDiv(newDiv.textContent); // Appeler une fonction pour ouvrir div_chat avec le titre
-                    });
-
-
 // Fonction pour ouvrir la div_chat et y afficher le titre
 function openChatDiv(title) {
     const chatDiv = document.getElementById('div_chat'); // Assurez-vous que cette div existe dans votre HTML
     if (chatDiv) {
         // Remplir la div_chat avec le titre
-        chatDiv.innerHTML = `<div>${title}</div>`;
+        chatDiv.innerHTML = `<h3>${title}</h3>`;
         chatDiv.style.display = 'block';
     } else {
         console.error('div_chat non trouvée');

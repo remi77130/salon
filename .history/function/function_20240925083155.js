@@ -313,8 +313,8 @@ function openChatDiv(title) {
     const chatDiv = document.getElementById('div_chat'); // Assurez-vous que cette div existe dans votre HTML
     if (chatDiv) {
         // Remplir la div_chat avec le titre
-        chatDiv.innerHTML = `<div>${title}</div>`;
-        chatDiv.style.display = 'block';
+        chat_Div.innerHTML = `<h3>${title}</h3>`;
+        chat_Div.style.display = 'block';
     } else {
         console.error('div_chat non trouvée');
     }
