@@ -149,6 +149,58 @@ $myuser = $_SESSION['user'];
 
 
 
+<!-- Bouton pour créer une div -->
+<button id="button_create_div" style="display:none;">Créer mon salon</button>
+
+
+
+<div id="container_div_create">
+    <!-- Les nouvelles divs seront ajoutées ici -->
+</div>
+
+
+<!-- La div pour afficher le chat -->
+<div class="div_chat" id="div_chat" style="display:none;">
+    <h3 id="chat-title"></h3> <!-- Affiche le titre de la div -->
+    <div id="chat-content"></div> <!-- Affiche le contenu des messages -->
+ <!-- Form for sending messages -->
+ <form class="form_div_chat" id="form_div_chat" onsubmit="sendMessage(event)">
+        <input type="text" id="chat-input" placeholder="Tapez votre message..." required>
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+<!-- Formulaire caché pour entrer le nom de la div -->
+<div id="create-div-form" style="display: none;">
+    <label for="div-name">Nom du salon :</label>
+    <input type="text" id="div-name" placeholder="Nom du salon">
+    <button id="submit-div-name">Créer</button>
+    <button id="cancel-create-div">Annuler</button>
+</div>
+
+
+
+<div class="nav_bottom_chat">
+	<nav>
+
+		<button><a href="">Salons</a></button>
+		<button><a href="">Options</a></button>
+		<button>
+			<a href="">Connécté</a></button>
+
+	</nav>
+</div>
+
+
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>

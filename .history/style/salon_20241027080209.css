@@ -450,16 +450,15 @@ th{
 }
 
 .close-btn {
-    top: 10px;
     position: fixed;
-    right: 10px;
-    background-color: #ff1414;
+    top: 0;
+    right: 0;
+    background-color: red;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     z-index: 10000;
-    border-radius: 10px;
 }
 
 .message {

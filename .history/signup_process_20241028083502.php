@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $department = trim($_POST['department']);
     $ville_users = $_POST['ville_users']; // La ville sélectionnée par l'utilisateur
     $gender = $_POST['gender'];
-    //$pays = trim($_POST['pays']);
+    $pays = trim($_POST['pays']);
 
 
     // Validation des données
@@ -103,13 +103,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
     // Insertion des informations dans la base de données, y compris la ville sélectionnée
-    $sql = "INSERT INTO users (username, avatar, age, department, ville_users, gender) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (username, avatar, age, department, ville_users, gender, pays) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         error_log("Erreur de préparation de la requête : " . $conn->error);
         die("Une erreur interne est survenue. Veuillez réessayer plus tard.");
     }
-	
+	if (!$ville_users) {
+		$ville_users = 'Paris';
+	}
     $stmt->bind_param("ssisss", $pseudo, $avatarDestination, $age, $department, $ville_users, $gender);
 
     if ($stmt->execute()) {
@@ -124,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			'dep'=>$department,
 			'ville'=>$ville_users,
 			'gender'=>$gender,
+            'pays'=>$pays,
 		];
 		$_SESSION['user'] = $myuser;
 

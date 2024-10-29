@@ -4,11 +4,10 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pseudo = trim($_POST['username']);
     $age = (int)$_POST['age'];
+    $pays = $_POST['pays'];
     $department = trim($_POST['department']);
     $ville_users = $_POST['ville_users']; // La ville sélectionnée par l'utilisateur
     $gender = $_POST['gender'];
-    //$pays = trim($_POST['pays']);
-
 
     // Validation des données
     if (strlen($pseudo) < 3 || strlen($pseudo) > 120) {
@@ -109,7 +108,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Erreur de préparation de la requête : " . $conn->error);
         die("Une erreur interne est survenue. Veuillez réessayer plus tard.");
     }
-	
+	if (!$ville_users) {
+		$ville_users = 'Paris';
+	}
     $stmt->bind_param("ssisss", $pseudo, $avatarDestination, $age, $department, $ville_users, $gender);
 
     if ($stmt->execute()) {

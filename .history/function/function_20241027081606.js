@@ -195,10 +195,3 @@ document.getElementById('send-message').addEventListener('click', function() {
         chatInput.value = '';
     }
 });
-
-
-
-
-
-
-

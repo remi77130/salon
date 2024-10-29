@@ -73,7 +73,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </div>
 
     <div class="input-box">
-    <input type="file" id="avatar" name="avatar" accept="image/JPEG, PNG, GIF" >
+    <input type="file" id="avatar" name="avatar">
 
 
 

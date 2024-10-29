@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Erreur de préparation de la requête : " . $conn->error);
         die("Une erreur interne est survenue. Veuillez réessayer plus tard.");
     }
-	
+	}
     $stmt->bind_param("ssisss", $pseudo, $avatarDestination, $age, $department, $ville_users, $gender);
 
     if ($stmt->execute()) {

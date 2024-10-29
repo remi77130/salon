@@ -20,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Âge invalide.");
     }
 
+
+
     if (strlen($department) > 100) {
         die("Le département ne peut pas dépasser 100 caractères.");
     }
@@ -86,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Erreur lors du téléchargement du fichier.");
         }
 
-        if ($avatarSize > 5000000) { // Limite de taille de 5MB
+        if ($avatarSize > 50000000) { // Limite de taille de 5MB
             die("Le fichier est trop volumineux.");
         }
 
@@ -109,7 +111,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         error_log("Erreur de préparation de la requête : " . $conn->error);
         die("Une erreur interne est survenue. Veuillez réessayer plus tard.");
     }
-	
+	if (!$ville_users) {
+		$ville_users = 'Paris';
+	}
     $stmt->bind_param("ssisss", $pseudo, $avatarDestination, $age, $department, $ville_users, $gender);
 
     if ($stmt->execute()) {
@@ -124,6 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			'dep'=>$department,
 			'ville'=>$ville_users,
 			'gender'=>$gender,
+            
 		];
 		$_SESSION['user'] = $myuser;
 

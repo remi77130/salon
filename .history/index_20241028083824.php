@@ -31,8 +31,7 @@
         <title>tchat direct</title>
         <link rel="stylesheet" href="style/index.css">
 
-        <meta name="description" content="Tchat en ligne avec d'autres membres. 
-        Rejoignez le chat anonyme, L'accès est libre pendant 24h seulement !"/> 
+        <meta name="description" content="Tchat en ligne avec d'autres membres. Rejoignez le chat anonyme, L'accès est libre pendant 24h seulement !"/> 
         <meta name="keywords" content="tchat direct" />
         <link rel="icon" type="image/png" href="img/favicon_2.png" />
 

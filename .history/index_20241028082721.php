@@ -31,8 +31,7 @@
         <title>tchat direct</title>
         <link rel="stylesheet" href="style/index.css">
 
-        <meta name="description" content="Tchat en ligne avec d'autres membres. 
-        Rejoignez le chat anonyme, L'accès est libre pendant 24h seulement !"/> 
+        <meta name="description" content="Tchat en ligne avec d'autres membres. Rejoignez le chat anonyme, L'accès est libre pendant 24h seulement !"/> 
         <meta name="keywords" content="tchat direct" />
         <link rel="icon" type="image/png" href="img/favicon_2.png" />
 
@@ -84,9 +83,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 <input placeholder="Age" type="number" id="age" name="age" required  required maxlength="2" >
 
                     </div>
-                    <!--
-        <select id="pays" name="pays" required>
-<option value="">Sélectionnez un pays</option>
+
+         <!--           <select id="pays" name="pays" required>
+            <option value="">Sélectionnez un pays</option>
             <option value="france">France</option>
             <option value="amerique">Amérique</option>
         </select>-->
