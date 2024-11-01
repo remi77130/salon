@@ -117,6 +117,7 @@ $myuser = $_SESSION['user'];
             <input type="hidden" id="username" value="<?php echo htmlspecialchars($username); ?>">
 
 
+
             <input type="text" id="chat-input" placeholder="Tapez votre message ici...">
             <button id="send-message">Envoyer</button>
         </div>
@@ -133,7 +134,7 @@ $myuser = $_SESSION['user'];
 	<div id="chat-window" style="display:none;">
 		<div id="chat-messages"></div>
 		<input name="message" id="chat-input" type="text" placeholder="Entrez votre message">
-	
+	<!-- envoyer une image -->	<input type="file" id="img_message" accept="image/JPEG, PNG, GIF" >
 		<button id="send-button">Envoyer</button>
 	</div>
 

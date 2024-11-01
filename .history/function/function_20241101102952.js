@@ -54,7 +54,7 @@ function setupChatEvents(userId) {
     const messageInput = document.getElementById('chat-input');
     const sendButton = document.getElementById('send-button');
     
-    sendButton.addEventListener('click', () => handleMessageSend(userId, messageInput));
+    sendButton.addEventListener('click', () => handleMessageSend(userId, messageInput, fileInput));
 
     socket.on('chatMessage', ({ from, message }) => {
         if (from === userId) appendMessage(message, 'received');
@@ -65,14 +65,16 @@ function setupChatEvents(userId) {
  * Gère l'envoi de message.
  * @param {number} userId - ID de l'utilisateur cible.
  * @param {HTMLInputElement} messageInput - Champ de texte pour le message.
+ * @param {HTMLInputElement} fileInput - Champ de fichier pour les images.
  */
-function handleMessageSend(userId, messageInput) {
+function handleMessageSend(userId, messageInput, fileInput) {
     const message = messageInput.value.trim();
     if (message) {
         socket.emit('chatMessage', { to: userId, message });
         appendMessage(message, 'sent');
         messageInput.value = '';
     }
+    fileInput.value = '';  // Réinitialisation du champ de fichier
 }
 
 /**

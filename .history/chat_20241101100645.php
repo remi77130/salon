@@ -117,6 +117,8 @@ $myuser = $_SESSION['user'];
             <input type="hidden" id="username" value="<?php echo htmlspecialchars($username); ?>">
 
 
+<!-- Champ pour envoyer une image -->
+<input type="file" id="img_message" accept="image/jpeg, image/png, image/gif">
             <input type="text" id="chat-input" placeholder="Tapez votre message ici...">
             <button id="send-message">Envoyer</button>
         </div>

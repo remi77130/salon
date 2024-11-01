@@ -65,6 +65,7 @@ function setupChatEvents(userId) {
  * Gère l'envoi de message.
  * @param {number} userId - ID de l'utilisateur cible.
  * @param {HTMLInputElement} messageInput - Champ de texte pour le message.
+ * /**@param {HTMLInputElement} fileInput - Champ de fichier pour les images.
  */
 function handleMessageSend(userId, messageInput) {
     const message = messageInput.value.trim();
@@ -73,6 +74,7 @@ function handleMessageSend(userId, messageInput) {
         appendMessage(message, 'sent');
         messageInput.value = '';
     }
+    //fileInput.value = '';  // Réinitialisation du champ de fichier
 }
 
 /**

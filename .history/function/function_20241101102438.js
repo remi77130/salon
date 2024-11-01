@@ -34,6 +34,7 @@ function renderProfile(data) {
             <div id="message_user"></div>
             <div id="chat-messages"></div>
             <input id="chat-input" type="text" placeholder="Entrez votre message">
+            <input type="file" id="img_message" accept="image/JPEG, PNG, GIF">
             <button id="send-button">Envoyer</button>
         </div>
     `;
@@ -52,9 +53,10 @@ function closeProfileContainer() {
  */
 function setupChatEvents(userId) {
     const messageInput = document.getElementById('chat-input');
+    const fileInput = document.getElementById('img_message');
     const sendButton = document.getElementById('send-button');
     
-    sendButton.addEventListener('click', () => handleMessageSend(userId, messageInput));
+    sendButton.addEventListener('click', () => handleMessageSend(userId, messageInput, fileInput));
 
     socket.on('chatMessage', ({ from, message }) => {
         if (from === userId) appendMessage(message, 'received');
@@ -65,14 +67,16 @@ function setupChatEvents(userId) {
  * Gère l'envoi de message.
  * @param {number} userId - ID de l'utilisateur cible.
  * @param {HTMLInputElement} messageInput - Champ de texte pour le message.
+ * @param {HTMLInputElement} fileInput - Champ de fichier pour les images.
  */
-function handleMessageSend(userId, messageInput) {
+function handleMessageSend(userId, messageInput, fileInput) {
     const message = messageInput.value.trim();
     if (message) {
         socket.emit('chatMessage', { to: userId, message });
         appendMessage(message, 'sent');
         messageInput.value = '';
     }
+    fileInput.value = '';  // Réinitialisation du champ de fichier
 }
 
 /**

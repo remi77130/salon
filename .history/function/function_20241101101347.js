@@ -11,33 +11,27 @@ function showProfileContainer(userId) {
                 alert(data.error);
                 return;
             }
-            renderProfile(data);
+
+            const container = document.getElementById('container_profil');
+            container.innerHTML = `
+                <div class="profile-content">
+                    <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
+                    <div>
+                        <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
+                        <h3>${sanitize(data.username)}</h3>  
+                        <h3>${sanitize(data.department)}</h3>
+                    </div>
+                    <div id="message_user"></div>
+                    <div id="chat-messages"></div>
+                    <input id="chat-input" type="text" placeholder="Entrez votre message">
+                    <input type="file" id="img_message" accept="image/JPEG, PNG, GIF">
+                    <button id="send-button">Envoyer</button>
+                </div>
+            `;
+            container.style.display = 'block';
             setupChatEvents(userId);
         })
         .catch(error => console.error('Erreur lors du chargement du profil:', error));
-}
-
-/**
- * Rend le profil dans le conteneur avec des informations de l'utilisateur.
- * @param {Object} data - Les informations utilisateur.
- */
-function renderProfile(data) {
-    const container = document.getElementById('container_profil');
-    container.innerHTML = `
-        <div class="profile-content">
-            <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
-            <div>
-                <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
-                <h3>${sanitize(data.username)}</h3>  
-                <h3>${sanitize(data.department)}</h3>
-            </div>
-            <div id="message_user"></div>
-            <div id="chat-messages"></div>
-            <input id="chat-input" type="text" placeholder="Entrez votre message">
-            <button id="send-button">Envoyer</button>
-        </div>
-    `;
-    container.style.display = 'block';
 }
 
 function closeProfileContainer() {
@@ -52,41 +46,27 @@ function closeProfileContainer() {
  */
 function setupChatEvents(userId) {
     const messageInput = document.getElementById('chat-input');
-    const sendButton = document.getElementById('send-button');
-    
-    sendButton.addEventListener('click', () => handleMessageSend(userId, messageInput));
+    const fileInput = document.getElementById('img_message');
+
+    document.getElementById('send-button').addEventListener('click', () => {
+        const message = messageInput.value;
+
+        if (message.trim()) {
+            socket.emit('chatMessage', { to: userId, message });
+            messageInput.value = '';
+        }
+
+        fileInput.value = ''; // Réinitialisation du champ de fichier
+    });
 
     socket.on('chatMessage', ({ from, message }) => {
-        if (from === userId) appendMessage(message, 'received');
+        if (from === userId) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+        }
     });
-}
-
-/**
- * Gère l'envoi de message.
- * @param {number} userId - ID de l'utilisateur cible.
- * @param {HTMLInputElement} messageInput - Champ de texte pour le message.
- */
-function handleMessageSend(userId, messageInput) {
-    const message = messageInput.value.trim();
-    if (message) {
-        socket.emit('chatMessage', { to: userId, message });
-        appendMessage(message, 'sent');
-        messageInput.value = '';
-    }
-}
-
-/**
- * Ajoute un message au conteneur de messages.
- * @param {string} message - Le message à afficher.
- * @param {string} type - Type de message, 'sent' ou 'received'.
- */
-function appendMessage(message, type) {
-    const messagesContainer = document.getElementById('chat-messages');
-    const messageElement = document.createElement('div');
-    messageElement.className = `message ${type}`;
-    messageElement.textContent = message;
-    messagesContainer.appendChild(messageElement);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 
@@ -120,7 +100,7 @@ function applyFilters() {
 
         const genderMatch = (genderFilter === 'all' || genderFilter === genderClass);
         const departmentMatch = (departmentFilter === 'all' || departmentFilter === department);
-        
+
         let ageMatch = true;
         if (ageFilter === '-30') ageMatch = age < 30;
         else if (ageFilter === '30-40') ageMatch = age >= 30 && age <= 40;
@@ -130,6 +110,7 @@ function applyFilters() {
     });
 }
 
+// Initialisation des filtres sur changement
 ['gender-filter', 'department-filter', 'age-filter'].forEach(filterId => {
     document.getElementById(filterId).addEventListener('change', applyFilters);
 });
@@ -148,42 +129,41 @@ function createChat(user, display = true) {
     $('.modal').hide();
 
     if (!$chat.length) {
-        $('body').append(renderChatTemplate(user));
+        const template = `
+            <div id="${id}" class="modal">
+                <div class="chat-popup">
+                    <div class="chat-header">
+                        <img src="${user.avatar}" alt="Avatar" class="avatar64">
+                        <div class="username">${user.username}</div>
+                        <div class="userage">${user.age} ans</div>
+                        <div class="userdpt">${user.dep}</div>
+                        <div class="userville">${user.ville}</div>
+                    </div>
+                    <div class="chat-content"></div>
+                    <div class="chat-footer">
+                        <input type="text" class="chat-input" placeholder="Tapez votre message...">
+                        <button class="send-btn">Envoyer</button>
+                    </div>
+                </div>
+                <button class="close-btn" onclick="closeModal()">Fermer</button>
+            </div>`;
+        $('body').append(template);
     }
     if (display) document.getElementById(id).style.display = 'flex';
 }
 
 /**
- * Rend le template de la fenêtre de chat.
- * @param {Object} user - L'utilisateur pour le chat.
- * @returns {string} - Template HTML de la fenêtre de chat.
+ * Ferme la fenêtre de chat.
  */
-function renderChatTemplate(user) {
-    return `
-        <div id="chat_${user.id}" class="modal">
-            <div class="chat-popup">
-                <div class="chat-header">
-                    <img src="${user.avatar}" alt="Avatar" class="avatar64">
-                    <div class="username">${user.username}</div>
-                    <div class="userage">${user.age} ans</div>
-                    <div class="userdpt">${user.dep}</div>
-                    <div class="userville">${user.ville}</div>
-                </div>
-                <div class="chat-content"></div>
-                <div class="chat-footer">
-                    <input type="text" class="chat-input" placeholder="Tapez votre message...">
-                    <button class="send-btn">Envoyer</button>
-                </div>
-            </div>
-            <button class="close-btn" onclick="closeModal()">Fermer</button>
-        </div>`;
-}
-
 function closeModal() {
     user_private = false;
     $('.modal').hide();
 }
 
+/**
+ * Ajoute un utilisateur à la liste avec son profil et les informations principales.
+ * @param {Object} user - L'utilisateur à ajouter.
+ */
 function addUser(user) {
     users[user.id] = user;
     const class_user = (user.gender === 'female') ? 'female-row' : 'male-row';
@@ -200,13 +180,22 @@ function addUser(user) {
     addDepartement(user.dep);
 }
 
+/**
+ * Ajoute un département au filtre s'il n'est pas déjà présent.
+ * @param {string} dep - Le département à ajouter.
+ */
 function addDepartement(dep) {
     const $departmentFilter = $('#department-filter');
     if ($departmentFilter.find(`option[value='${dep}']`).length === 0) {
-        $departmentFilter.append($('<option></option>').attr('value', dep).text(dep));
+        const newOption = $('<option></option>').attr('value', dep).text(dep);
+        $departmentFilter.append(newOption);
     }
 }
 
+/**
+ * Ajoute une notification pour un utilisateur spécifique.
+ * @param {Object} user - L'utilisateur pour lequel la notification est ajoutée.
+ */
 function addNotification(user) {
     const $notifications = $('#selected-profiles');
     if (!$notifications.find(`div[data-userid=${user.id}]`).length) {
