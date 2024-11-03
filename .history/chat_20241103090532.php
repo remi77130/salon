@@ -169,7 +169,7 @@ const socket = io('https://tchat-direct.com:2053', { query: { user: JSON.stringi
 
 // Les événements et la logique de gestion des utilisateurs et du chat suivent...
 </script>
-<script src="function/function_chat.js"></script>
+
 
 </body>
 </html>

@@ -33,7 +33,7 @@ function handleMessageSend(userId, messageInput) {
 // ========== SECTION 3: Fonctions Utilitaires ==========
 /**
  * Assainit les entrées pour éviter les failles XSS.
- * @returns {string} La chaîne assainie.
+ 
  */
 function sanitize(input) {
     const element = document.createElement('div');
@@ -93,7 +93,6 @@ function createChat(user, display = true) {
 
 /**
  * Rend le template de la fenêtre de chat.
- * @returns {string} - Template HTML de la fenêtre de chat.
  */
 function renderChatTemplate(user) {
     return `

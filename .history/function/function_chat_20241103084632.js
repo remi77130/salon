@@ -1,11 +1,6 @@
 // ========== SECTION 1: Gestion des Événements de Connexion et Déconnexion des Utilisateurs ==========
 /**
  * Ajoute un utilisateur à la liste des utilisateurs en ligne.
- * 
- * 
- * 
- * 
- * 
  */
 socket.on('addUser', function(user) {
     addUser(user);

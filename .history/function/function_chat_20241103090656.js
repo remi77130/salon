@@ -12,6 +12,38 @@ socket.on('addUser', function(user) {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  *  @param {Object} user - L'utilisateur ajouté.
  * @param {Object} $chat - Conteneur du chat.

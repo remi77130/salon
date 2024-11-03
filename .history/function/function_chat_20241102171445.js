@@ -1,26 +1,14 @@
 // ========== SECTION 1: Gestion des Événements de Connexion et Déconnexion des Utilisateurs ==========
 /**
  * Ajoute un utilisateur à la liste des utilisateurs en ligne.
- * 
- * 
- * 
- * 
- * 
+ * @param {Object} user - L'utilisateur ajouté.
  */
 socket.on('addUser', function(user) {
     addUser(user);
 });
 
 
-/**
- *  @param {Object} user - L'utilisateur ajouté.
- * @param {Object} $chat - Conteneur du chat.
- * @param {string} message - Le message à ajouter.
- * @param {string} classe - La classe CSS ('sent' ou 'received').
- * @returns {string} La chaîne assainie.
- *  * @param {Event} e - L'événement de clic sur la notification.
 
- */
 
 /**
  * Charge la liste complète des utilisateurs au démarrage.
@@ -60,6 +48,7 @@ function appendMessage($chat, message, classe) {
 // ========== SECTION 3: Gestion de l'Interface du Chat ==========
 /**
  * Envoie un message depuis le champ d'entrée du chat.
+ * @param {Event} e - L'événement du clic.
  */
 $(document).on('click', '.send-btn', (e) => {
     let input = $(e.currentTarget).parent().find('input');
@@ -83,6 +72,7 @@ $userlistContainer.on('click', '.user', function() {
 // ========== SECTION 4: Notifications de Nouveaux Messages ==========
 /**
  * Affiche une notification lorsqu'un nouveau message est reçu.
+ * @param {Event} e - L'événement de clic sur la notification.
  */
 $(document).on('click', '.notification', (e) => {
     $(e.currentTarget).remove();

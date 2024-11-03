@@ -1,6 +1,7 @@
 // ========== SECTION 1: Gestion de l'Affichage du Profil ==========
 /**
  * Affiche les informations de profil de l'utilisateur.
+ * @param {number} userId - L'ID de l'utilisateur dont le profil doit être affiché.
  */
 function showProfileContainer(userId) {
     
@@ -33,6 +34,7 @@ function handleMessageSend(userId, messageInput) {
 // ========== SECTION 3: Fonctions Utilitaires ==========
 /**
  * Assainit les entrées pour éviter les failles XSS.
+ * @param {string} input - La chaîne à assainir.
  * @returns {string} La chaîne assainie.
  */
 function sanitize(input) {
@@ -77,6 +79,7 @@ function applyFilters() {
 // ========== SECTION 5: Création de Fenêtres de Chat et Gestion des Notifications ==========
 /**
  * Crée une fenêtre de chat pour un utilisateur donné.
+ * @param {Object} user - L'objet utilisateur avec les informations nécessaires.
  * @param {boolean} [display=true] - Indique si la fenêtre de chat doit être affichée immédiatement.
  */
 function createChat(user, display = true) {
@@ -93,6 +96,7 @@ function createChat(user, display = true) {
 
 /**
  * Rend le template de la fenêtre de chat.
+ * @param {Object} user - L'utilisateur pour le chat.
  * @returns {string} - Template HTML de la fenêtre de chat.
  */
 function renderChatTemplate(user) {

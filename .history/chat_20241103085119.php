@@ -152,8 +152,7 @@ $myuser = $_SESSION['user'];
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-<script src="function/function.js"></script>
-<script>
+<script src="function/function_chat.js"></script><script>
 // Initialisation des constantes et des variables globales
 const $userlistContainer = $('#users-table>tbody');
 
@@ -169,7 +168,7 @@ const socket = io('https://tchat-direct.com:2053', { query: { user: JSON.stringi
 
 // Les événements et la logique de gestion des utilisateurs et du chat suivent...
 </script>
-<script src="function/function_chat.js"></script>
+
 
 </body>
 </html>

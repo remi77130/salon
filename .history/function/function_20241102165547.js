@@ -1,6 +1,7 @@
 // ========== SECTION 1: Gestion de l'Affichage du Profil ==========
 /**
  * Affiche les informations de profil de l'utilisateur.
+ * @param {number} userId - L'ID de l'utilisateur dont le profil doit être affiché.
  */
 function showProfileContainer(userId) {
     
@@ -18,6 +19,11 @@ function showProfileContainer(userId) {
 }
 
 
+/**
+ * Gère l'envoi de message.
+ * @param {number} userId - ID de l'utilisateur cible.
+ * @param {HTMLInputElement} messageInput - Champ de texte pour le message.
+ */
 function handleMessageSend(userId, messageInput) {
     const message = messageInput.value.trim();
     if (message) {
@@ -28,11 +34,24 @@ function handleMessageSend(userId, messageInput) {
 }
 
 /**
+ * Ajoute un message au conteneur de messages.
+ * @param {string} message - Le message à afficher.
+ * @param {string} type - Type de message, 'sent' ou 'received'.
+ */
+function appendMessage(message, type) {
+    const messagesContainer = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${type}`;
+    messageElement.textContent = message;
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
 
 
 // ========== SECTION 3: Fonctions Utilitaires ==========
 /**
  * Assainit les entrées pour éviter les failles XSS.
+ * @param {string} input - La chaîne à assainir.
  * @returns {string} La chaîne assainie.
  */
 function sanitize(input) {
@@ -77,6 +96,7 @@ function applyFilters() {
 // ========== SECTION 5: Création de Fenêtres de Chat et Gestion des Notifications ==========
 /**
  * Crée une fenêtre de chat pour un utilisateur donné.
+ * @param {Object} user - L'objet utilisateur avec les informations nécessaires.
  * @param {boolean} [display=true] - Indique si la fenêtre de chat doit être affichée immédiatement.
  */
 function createChat(user, display = true) {
@@ -93,6 +113,7 @@ function createChat(user, display = true) {
 
 /**
  * Rend le template de la fenêtre de chat.
+ * @param {Object} user - L'utilisateur pour le chat.
  * @returns {string} - Template HTML de la fenêtre de chat.
  */
 function renderChatTemplate(user) {

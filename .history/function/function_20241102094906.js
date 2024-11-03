@@ -1,9 +1,22 @@
+
+// Initialisation des constantes et des variables globales
+const $userlistContainer = $('#users-table>tbody');
+
+var users = {};
+var user_private = false;
+
+// Initialisation du socket avec les informations de l'utilisateur
+const socket = io('https://tchat-direct.com:2053', { query: { user: JSON.stringify(myuser) } });
+
+// Les événements et la logique de gestion des utilisateurs et du chat suivent...
+
+
 // ========== SECTION 1: Gestion de l'Affichage du Profil ==========
 /**
  * Affiche les informations de profil de l'utilisateur.
+ * @param {number} userId - L'ID de l'utilisateur dont le profil doit être affiché.
  */
 function showProfileContainer(userId) {
-    
     fetch(`get_user_info.php?user_id=${userId}`)
         .then(response => response.json())
         .then(data => {
@@ -17,7 +30,55 @@ function showProfileContainer(userId) {
         .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
 
+/**
+ * Rend le profil dans le conteneur avec des informations de l'utilisateur.
+ * @param {Object} data - Les informations utilisateur.
+ */
+function renderProfile(data) {
+    const container = document.getElementById('container_profil');
+    container.innerHTML = `
+        <div class="profile-content">
+            <button class="close-btn" onclick="closeProfileContainer()">Fermer</button>
+            <div>
+                <img src="${sanitize(data.avatar)}" alt="${sanitize(data.username)}" class="avatar">
+                <h3>${sanitize(data.username)}</h3>  
+                <h3>${sanitize(data.department)}</h3>
+            </div>
+            <div id="message_user"></div>
+            <div id="chat-messages"></div>
+            <input id="chat-input" type="text" placeholder="Entrez votre message">
+            <button id="send-button">Envoyer</button>
+        </div>
+    `;
+    container.style.display = 'block';
+}
 
+function closeProfileContainer() {
+    document.getElementById('container_profil').style.display = 'none';
+}
+
+
+// ========== SECTION 2: Gestion des Événements du Chat ==========
+/**
+ * Initialise les événements pour l'envoi de messages dans le chat.
+ * @param {number} userId - L'ID de l'utilisateur cible pour le chat.
+ */
+function setupChatEvents(userId) {
+    const messageInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+    
+    sendButton.addEventListener('click', () => handleMessageSend(userId, messageInput));
+
+    socket.on('chatMessage', ({ from, message }) => {
+        if (from === userId) appendMessage(message, 'received');
+    });
+}
+
+/**
+ * Gère l'envoi de message.
+ * @param {number} userId - ID de l'utilisateur cible.
+ * @param {HTMLInputElement} messageInput - Champ de texte pour le message.
+ */
 function handleMessageSend(userId, messageInput) {
     const message = messageInput.value.trim();
     if (message) {
@@ -28,11 +89,24 @@ function handleMessageSend(userId, messageInput) {
 }
 
 /**
+ * Ajoute un message au conteneur de messages.
+ * @param {string} message - Le message à afficher.
+ * @param {string} type - Type de message, 'sent' ou 'received'.
+ */
+function appendMessage(message, type) {
+    const messagesContainer = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${type}`;
+    messageElement.textContent = message;
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
 
 
 // ========== SECTION 3: Fonctions Utilitaires ==========
 /**
  * Assainit les entrées pour éviter les failles XSS.
+ * @param {string} input - La chaîne à assainir.
  * @returns {string} La chaîne assainie.
  */
 function sanitize(input) {
@@ -77,6 +151,7 @@ function applyFilters() {
 // ========== SECTION 5: Création de Fenêtres de Chat et Gestion des Notifications ==========
 /**
  * Crée une fenêtre de chat pour un utilisateur donné.
+ * @param {Object} user - L'objet utilisateur avec les informations nécessaires.
  * @param {boolean} [display=true] - Indique si la fenêtre de chat doit être affichée immédiatement.
  */
 function createChat(user, display = true) {
@@ -93,6 +168,7 @@ function createChat(user, display = true) {
 
 /**
  * Rend le template de la fenêtre de chat.
+ * @param {Object} user - L'utilisateur pour le chat.
  * @returns {string} - Template HTML de la fenêtre de chat.
  */
 function renderChatTemplate(user) {

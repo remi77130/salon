@@ -93,7 +93,6 @@ function createChat(user, display = true) {
 
 /**
  * Rend le template de la fenêtre de chat.
- * @returns {string} - Template HTML de la fenêtre de chat.
  */
 function renderChatTemplate(user) {
     return `
