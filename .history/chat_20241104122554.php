@@ -55,7 +55,7 @@ $myuser = $_SESSION['user'];
 		</select>
 
 
-		<!-- Ajout du Sélecteur de Filtre pour le Département -->
+		<!-- Ajout du Sélecteur de Filtre pour le Département 
 		<label for="department-filter">Dpt :</label>
 		<select id="department-filter" onchange="applyFilters()">
 			<option value="all">Tous</option>

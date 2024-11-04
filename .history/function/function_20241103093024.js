@@ -1,4 +1,32 @@
 // ========== SECTION 1: Gestion de l'Affichage du Profil ==========
+
+
+
+// ========== SECTION 1: Gestion des Événements de Connexion et Déconnexion des Utilisateurs ==========
+/**
+ * Ajoute un utilisateur à la liste des utilisateurs en ligne.
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+socket.on('addUser', function(user) {
+    addUser(user);
+});
+
+
+/**
+ *  @param {Object} user - L'utilisateur ajouté.
+ * @param {Object} $chat - Conteneur du chat.
+ * @param {string} message - Le message à ajouter.
+ * @param {string} classe - La classe CSS ('sent' ou 'received').
+ * @returns {string} La chaîne assainie.
+ *  * @param {Event} e - L'événement de clic sur la notification.
+
+ */
+
+/**
 /**
  * Affiche les informations de profil de l'utilisateur.
  */
@@ -16,6 +44,7 @@ function showProfileContainer(userId) {
         })
         .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
+
 
 function handleMessageSend(userId, messageInput) {
     const message = messageInput.value.trim();
@@ -90,16 +119,6 @@ function createChat(user, display = true) {
     if (display) document.getElementById(id).style.display = 'flex';
 }
 
-
-
-
-
-
-
-
-
-
-
 /**
  * Rend le template de la fenêtre de chat.
  * @returns {string} - Template HTML de la fenêtre de chat.
@@ -159,6 +178,3 @@ function addNotification(user) {
         $notifications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
     }
 }
-
-
-

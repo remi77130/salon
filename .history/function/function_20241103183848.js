@@ -90,16 +90,6 @@ function createChat(user, display = true) {
     if (display) document.getElementById(id).style.display = 'flex';
 }
 
-
-
-
-
-
-
-
-
-
-
 /**
  * Rend le template de la fenêtre de chat.
  * @returns {string} - Template HTML de la fenêtre de chat.

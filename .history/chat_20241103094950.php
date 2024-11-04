@@ -106,7 +106,30 @@ $myuser = $_SESSION['user'];
 	</div>  <!-- FIN CONTAINER 8PROFIL8 PARENT -->
 
 
-	
+
+
+
+
+	<div id="rencontre-container">
+        <h3 onclick="toggleRencontre()">Rencontre Paris</h3>
+        <div id="rencontre">
+            <div id="chat-content"></div>
+            <input type="hidden" id="username" value="<?php echo htmlspecialchars($username); ?>">
+
+
+            <input type="text" id="chat-input" placeholder="Tapez votre message ici...">
+            <button id="send-message">Envoyer</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
 	<div id="chat-window" style="display:none;">
 		<div id="chat-messages"></div>
 		<input name="message" id="chat-input" type="text" placeholder="Entrez votre message">
@@ -129,6 +152,7 @@ $myuser = $_SESSION['user'];
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script src="function/initialization.js"></script> <!-- Ce fichier doit contenir l'initialisation de `socket` -->
 <script src="function/function.js"></script>
 <script>
 // Initialisation des constantes et des variables globales

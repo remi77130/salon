@@ -1,4 +1,7 @@
 // ========== SECTION 1: Gestion de l'Affichage du Profil ==========
+
+
+
 /**
  * Affiche les informations de profil de l'utilisateur.
  */
@@ -16,6 +19,7 @@ function showProfileContainer(userId) {
         })
         .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
+
 
 function handleMessageSend(userId, messageInput) {
     const message = messageInput.value.trim();
@@ -90,16 +94,6 @@ function createChat(user, display = true) {
     if (display) document.getElementById(id).style.display = 'flex';
 }
 
-
-
-
-
-
-
-
-
-
-
 /**
  * Rend le template de la fenêtre de chat.
  * @returns {string} - Template HTML de la fenêtre de chat.
@@ -159,6 +153,3 @@ function addNotification(user) {
         $notifications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
     }
 }
-
-
-
