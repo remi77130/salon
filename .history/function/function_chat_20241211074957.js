@@ -51,6 +51,16 @@ socket.on('private', function(user, message) {
     }
 });
 
+
+
+
+
+
+
+
+
+
+
 function appendMessage($chat, message, classe) {
     $chat.append(`<div class="message ${classe}">${message}</div>`);
     $chat.scrollTop($chat[0].scrollHeight);

@@ -134,21 +134,26 @@ function closeModal() {
     $('.modal').hide();
 }
 
-function addUser(user) {
-    users[user.id] = user;
-    const class_user = (user.gender === 'female') ? 'female-row' : 'male-row';
-    $userlistContainer.append(`
-        <tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" 
-            data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" 
-            data-dep="${user.dep}" data-gender="${user.gender}">
-            <td><img class="avatar16" src="${user.avatar}" </td>
-            <td><b>${user.username}</b></td>
-            <td>${user.age}</td>
-            <td>${user.dep}</td>
-            <td>${user.ville}</td>
-        </tr>`);
-    addDepartement(user.dep);
-}
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('fetch_users.php')
+        .then(response => response.json())
+        .then(users => {
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = ''; // Vider l'ancien contenu
+            users.forEach(user => {
+                const row = `
+                    <tr>
+                        <td>${user.username}</td>
+                        <td>${user.age}</td>
+                        <td>${user.city}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        })
+        .catch(error => console.error('Erreur lors de la récupération des utilisateurs:', error));
+});
+
 
 function addDepartement(dep) {
     const $departmentFilter = $('#department-filter');

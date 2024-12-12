@@ -17,6 +17,7 @@ function showProfileContainer(userId) {
         .catch(error => console.error('Erreur lors du chargement du profil:', error));
 }
 
+
 function handleMessageSend(userId, messageInput) {
     const message = messageInput.value.trim();
     if (message) {
@@ -90,16 +91,6 @@ function createChat(user, display = true) {
     if (display) document.getElementById(id).style.display = 'flex';
 }
 
-
-
-
-
-
-
-
-
-
-
 /**
  * Rend le template de la fenêtre de chat.
  * @returns {string} - Template HTML de la fenêtre de chat.
@@ -109,19 +100,15 @@ function renderChatTemplate(user) {
         <div id="chat_${user.id}" class="modal">
             <div class="chat-popup">
                 <div class="chat-header">
-
                     <img src="${user.avatar}" alt="Avatar" class="avatar64">
                     <div class="username">${user.username}</div>
                     <div class="userage">${user.age} ans</div>
                     <div class="userdpt">${user.dep}</div>
                     <div class="userville">${user.ville}</div>
                 </div>
-
                 <div class="chat-content"></div>
                 <div class="chat-footer">
-                
                     <input type="text" class="chat-input" placeholder="Tapez votre message...">
-
                     <button class="send-btn">Envoyer</button>
                 </div>
             </div>
@@ -141,7 +128,7 @@ function addUser(user) {
         <tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" 
             data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" 
             data-dep="${user.dep}" data-gender="${user.gender}">
-            <td><img class="avatar16" src="${user.avatar}" </td>
+            <td><img class="avatar16" src="${user.avatar}" alt="${user.username}"></td>
             <td><b>${user.username}</b></td>
             <td>${user.age}</td>
             <td>${user.dep}</td>
@@ -163,29 +150,3 @@ function addNotification(user) {
         $notifications.append(`<div class="notification" data-userid="${user.id}" data-username="${user.username}">${user.username}</div>`);
     }
 }
-
-
-
-//  Gestion des images dans le chat
-
-function sendImage(input) {
-    const file = input.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const imageData = event.target.result; // Image en Base64
-        socket.emit('chatImage', { to: user_private.id, image: imageData });
-        
-        // Affiche l'image immédiatement dans le chat
-        appendImage(imageData, 'sent');
-    };
-    reader.readAsDataURL(file);
-}
-
-function appendImage(imageData, classe) {
-    const $chat = $(`#chat_${user_private.id} .chat-content`);
-    $chat.append(`<div class="message ${classe}"><img src="${imageData}" alt="Image envoyée" class="chat-image"></div>`);
-    $chat.scrollTop($chat[0].scrollHeight);
-}
-

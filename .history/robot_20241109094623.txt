@@ -1,0 +1,14 @@
+user-agent: googlebot
+Disallow: /salon/
+
+Allow: /salon/index.php
+
+Allow: /salon/contact.html
+
+Allow: /salon/articles.php
+
+Allow: /salon/blog.php
+
+Allow: /salon/chat.php
+
+Allow: /salon/404.php

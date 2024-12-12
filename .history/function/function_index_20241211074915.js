@@ -60,3 +60,17 @@ function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
+// ========== SECTION 4: Mise à jour du compteur ==========
+/**
+ * Met à jour le compteur avec une valeur aléatoire toutes les 3 secondes.
+ */
+function updateCounter() {
+    const counterElement = document.getElementById('counter');
+    const randomValue = generateRandomNumber(120, 145);
+    counterElement.textContent = randomValue;
+}
+
+// Initialisation du compteur avec une mise à jour toutes les 3 secondes (3000 ms)
+setInterval(updateCounter, 3000);
+updateCounter();  // Appel initial pour démarrer immédiatement le compteur

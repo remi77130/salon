@@ -49,7 +49,7 @@ function applyFilters() {
     const genderFilter = document.getElementById('gender-filter').value;
     const departmentFilter = document.getElementById('department-filter').value;
     const ageFilter = document.getElementById('age-filter').value;
-    const rows = document.querySelectorAll('#users-table tbody tr');
+    const rows = document.querySelectorAll('#users-table tbody ');
 
     rows.forEach(row => {
         const genderClass = row.classList.contains('female-row') ? 'female' : row.classList.contains('male-row') ? 'male' : 'other';

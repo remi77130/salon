@@ -96,7 +96,8 @@
 					</thead>
 					<tbody>
 					<!-- Les utilisateurs seront insérés ici par JavaScript -->
-					 
+					var_dump($users); // Vérifie que les données sont bien extraites.
+					die(); // Arrête le script pour voir le résultat brut.
 					</tbody>
 
 				</table>
@@ -128,8 +129,7 @@
 		
 	// Initialisation des constantes et des variables globales
 	const $userlistContainer = $('#users-table>tbody');
-	var_dump($users); // Vérifie que les données sont bien extraites.
-	die(); // Arrête le script pour voir le résultat brut.
+
 	// Récupération des données utilisateur passées depuis PHP
 	var myuser = {};
 	myuser = <?php echo json_encode($myuser); ?>;

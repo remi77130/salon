@@ -121,6 +121,7 @@ function renderChatTemplate(user) {
                 <div class="chat-footer">
                 
                     <input type="text" class="chat-input" placeholder="Tapez votre message...">
+                    <input type="file" class="image-input" accept="image/*" onchange="sendImage(this)">
 
                     <button class="send-btn">Envoyer</button>
                 </div>

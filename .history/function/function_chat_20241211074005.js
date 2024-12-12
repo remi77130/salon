@@ -51,6 +51,34 @@ socket.on('private', function(user, message) {
     }
 });
 
+
+function addUser(user) {
+    users[user.id] = user;
+    const class_user = (user.gender === 'female') ? 'female-row' : 'male-row';
+    $userlistContainer.append(`
+        <tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" 
+            data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" 
+            data-dep="${user.dep}" data-gender="${user.gender}">
+            <td><img class="avatar16" src="${user.avatar}" </td>
+            <td><b>${user.username}</b></td>
+            <td>${user.age}</td>
+            <td>${user.dep}</td>
+            <td>${user.ville}</td>
+        </tr>`);
+    addDepartement(user.dep);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function appendMessage($chat, message, classe) {
     $chat.append(`<div class="message ${classe}">${message}</div>`);
     $chat.scrollTop($chat[0].scrollHeight);

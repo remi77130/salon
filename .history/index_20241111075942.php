@@ -65,7 +65,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
 
         
         
-    <form action="signup_process.php" method="post" enctype="multipart/form-data">
+    <form action="signup_process.php" method="post">
 
     <div class="input-box">
                 
@@ -73,7 +73,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </div>
 
     <div class="input-box">
-    <input type="file" id="avatar" name="avatar" accept="image/JPEG, PNG, GIF" >
+    <input type="file" id="avatar" name="avatar" accept="*" >
 
 
 
@@ -84,7 +84,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 <input placeholder="Age" type="number" id="age" name="age" required  required maxlength="2" >
 
                     </div>
-   
+                    <!--
+        <select id="pays" name="pays" required>
+<option value="">Sélectionnez un pays</option>
+            <option value="france">France</option>
+            <option value="amerique">Amérique</option>
+        </select>-->
+
 
     <!-- Champ de saisie pour le département (type tel) -->
     <div class="input-box">

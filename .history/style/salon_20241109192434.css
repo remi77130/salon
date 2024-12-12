@@ -370,7 +370,6 @@ th{
     width: 64px;
     height: 64px;
     border-radius: 64px;
-    box-shadow: 3px 2px 6px 0px #00000061;
 }
 .avatar32 {
     width: 32px;
@@ -622,9 +621,4 @@ tr {
 .salons_chat
 {
     border: 5px solid red;
-}
-
-.salon_adulte
-{
-    border: 2px solid green;
 }

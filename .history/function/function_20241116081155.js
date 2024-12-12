@@ -121,6 +121,7 @@ function renderChatTemplate(user) {
                 <div class="chat-footer">
                 
                     <input type="text" class="chat-input" placeholder="Tapez votre message...">
+                    <input type="file" class="image-input" accept="image/*" onchange="sendImage(this)">
 
                     <button class="send-btn">Envoyer</button>
                 </div>
@@ -141,7 +142,7 @@ function addUser(user) {
         <tr class="user ${class_user}" data-userid="${user.id}" data-username="${user.username}" 
             data-avatar="${user.avatar}" data-age="${user.age}" data-ville="${user.ville}" 
             data-dep="${user.dep}" data-gender="${user.gender}">
-            <td><img class="avatar16" src="${user.avatar}" </td>
+            <td><img class="avatar16" src="${user.avatar}" alt="${user.username}"></td>
             <td><b>${user.username}</b></td>
             <td>${user.age}</td>
             <td>${user.dep}</td>

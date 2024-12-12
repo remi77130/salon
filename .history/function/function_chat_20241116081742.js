@@ -46,10 +46,11 @@ socket.on('private', function(user, message) {
     } else {
         createChat(user, false);
         $chat = $(`#chat_${user.id} .chat-content`);
-        appendMessage($chat, message, classe);
+        appendMessage($chat, message, classe, receiveImage);
         addNotification(user);
     }
 });
+
 
 function appendMessage($chat, message, classe) {
     $chat.append(`<div class="message ${classe}">${message}</div>`);

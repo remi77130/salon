@@ -84,7 +84,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 <input placeholder="Age" type="number" id="age" name="age" required  required maxlength="2" >
 
                     </div>
-   
+                    <!--
+        <select id="pays" name="pays" required>
+<option value="">Sélectionnez un pays</option>
+            <option value="france">France</option>
+            <option value="amerique">Amérique</option>
+        </select>-->
+
 
     <!-- Champ de saisie pour le département (type tel) -->
     <div class="input-box">
