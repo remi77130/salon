@@ -1,0 +1,64 @@
+<?php
+// Connexion à la base de données
+$servername = "localhost";
+$username = "admin"; // Nom d'utilisateur par défaut de XAMPP
+$password = "JGsb18as5jgwqZj5"; // Mot de passe par défaut de XAMPP (généralement vide)
+$dbname = "morpion";
+
+// Création de la connexion
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Vérification de la connexion
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+// Gestion de l'inscription
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash du mot de passe
+
+    // Vérifier si l'utilisateur existe déjà
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
+    $stmt->bind_param("ss", $email, $username);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        echo "Email ou pseudo déjà utilisé.";
+    } else {
+        // Insérer un nouvel utilisateur
+        $stmt = $conn->prepare("INSERT INTO users_games (username, email, password, points) VALUES (?, ?, ?, 100)");
+        $stmt->bind_param("sss", $username, $email, $password);
+
+        if ($stmt->execute()) {
+            echo "Inscription réussie. <a href='login.php'>Connectez-vous ici</a>.";
+        } else {
+            echo "Erreur lors de l'inscription.";
+        }
+    }
+    $stmt->close();
+}
+$conn->close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>
+
+
+
