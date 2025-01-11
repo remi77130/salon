@@ -48,7 +48,6 @@
           <p><button id="okBtn" onclick="getOptions()">Play</button></p>
       </div>
     </div>
-    <a href="logout.php">Fuir d'ici !</a>
-    <script src="function.js"></script>
+    <script src="test.js"></script>
   </body>
 </html>

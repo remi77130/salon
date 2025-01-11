@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 // Vérifie si l'utilisateur est connecté, sinon le redirige vers la page de connexion
 
 if (!isset($_SESSION['user_id'])) {
